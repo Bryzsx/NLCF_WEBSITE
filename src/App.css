@@ -1,0 +1,1531 @@
+.page {
+  min-height: 100vh;
+  background: var(--nlcf-mist);
+  color: var(--nlcf-slate);
+}
+
+.main-content {
+  min-height: calc(100vh - 170px);
+}
+
+.container {
+  width: min(1120px, 93%);
+  margin: 0 auto;
+}
+
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 10;
+  background: rgba(0, 0, 0, 0.64);
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.24);
+  transition: background 0.25s ease, border-color 0.25s ease;
+}
+
+.nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-height: 58px;
+  gap: 12px;
+}
+
+.logo-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+}
+
+.logo-image {
+  width: 28px;
+  height: 28px;
+  object-fit: cover;
+  border-radius: 999px;
+  border: 1px solid var(--nlcf-mist);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+}
+
+.brand-copy {
+  color: var(--nlcf-white);
+  margin-right: auto;
+  display: flex;
+  align-items: center;
+}
+
+.brand-wordmark {
+  margin: 0;
+  font-family: 'Montserrat', 'Open Sans', sans-serif;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.nav nav {
+  display: flex;
+  gap: 1.1rem;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.nav a {
+  color: var(--nlcf-white);
+  text-decoration: none;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.01em;
+  text-transform: none;
+  opacity: 0.95;
+  font-family: 'Montserrat', 'Open Sans', sans-serif;
+  position: relative;
+  transition: color 0.2s ease, opacity 0.2s ease;
+}
+
+.nav .nav-link {
+  display: inline-flex;
+  align-items: center;
+  line-height: 1;
+  white-space: nowrap;
+}
+
+.nav-link::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: -4px;
+  width: 100%;
+  height: 2px;
+  background: var(--nlcf-sky);
+  transform: scaleX(0);
+  transform-origin: left center;
+  transition: transform 0.2s ease;
+}
+
+.nav-link:hover {
+  color: var(--nlcf-mist);
+  opacity: 1;
+}
+
+.nav-link:hover::after,
+.nav-link.active::after {
+  transform: scaleX(1);
+}
+
+.nav-group {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  height: 100%;
+}
+
+/* Invisible bridge so cursor can reach dropdown without closing hover */
+.nav-group:has(.dropdown)::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 100%;
+  height: 12px;
+  z-index: 15;
+}
+
+.dropdown {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  min-width: 170px;
+  background: #ffffff;
+  border-radius: 6px;
+  box-shadow: 0 18px 32px rgba(0, 0, 0, 0.25);
+  padding: 0.45rem 0;
+  display: none;
+  z-index: 20;
+}
+
+.dropdown a {
+  display: block;
+  color: #121a24;
+  font-size: 0.76rem;
+  font-weight: 600;
+  text-transform: none;
+  letter-spacing: 0;
+  padding: 0.55rem 0.8rem;
+}
+
+.dropdown a:hover {
+  background: rgba(0, 0, 0, 0.08);
+}
+
+.nav-group:hover .dropdown {
+  display: block;
+}
+
+.menu-toggle {
+  display: none;
+  width: 42px;
+  height: 42px;
+  border: 1px solid var(--nlcf-mist);
+  border-radius: 8px;
+  background: transparent;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 5px;
+  cursor: pointer;
+}
+
+.menu-toggle span {
+  width: 18px;
+  height: 2px;
+  background: var(--nlcf-white);
+  border-radius: 2px;
+}
+
+.hero {
+  position: relative;
+  min-height: 100vh;
+  display: grid;
+  align-items: center;
+  background-image: url('https://images.unsplash.com/photo-1529078155058-5d716f45d604?auto=format&fit=crop&w=1800&q=80');
+  background-size: cover;
+  background-position: center;
+  animation: heroPan 18s ease-in-out infinite alternate;
+}
+
+@keyframes heroPan {
+  from {
+    background-position: center;
+  }
+  to {
+    background-position: center 42%;
+  }
+}
+
+.cal-hero {
+  position: relative;
+  min-height: 88vh;
+  display: grid;
+  align-items: center;
+  background-image: url('/hero-home.png');
+  background-size: cover;
+  background-position: center center;
+}
+
+.cal-hero--home .cal-hero-overlay--dark {
+  background: rgba(0, 0, 0, 0.55);
+}
+
+.cal-hero-content {
+  position: relative;
+  z-index: 1;
+  color: var(--nlcf-white);
+  padding-top: 100px;
+  max-width: 960px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.cal-hero-title {
+  font-size: clamp(2.6rem, 7vw, 5.5rem);
+  margin: 0 0 1.5rem;
+  line-height: 0.95;
+  letter-spacing: -0.02em;
+  font-weight: 800;
+  font-family: 'Montserrat', 'Open Sans', sans-serif;
+}
+
+.btn-arrow {
+  margin-left: 0.15em;
+}
+
+.welcome-strip {
+  background: #ffffff;
+  border-top: 1px solid rgba(0, 0, 0, 0.06);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+  /* Allow vertical text so WELCOME/HOME doesn't get clipped. */
+  overflow: visible;
+  padding: 0.6rem 0;
+}
+
+.welcome-marquee {
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+}
+
+.welcome-track {
+  display: flex;
+  width: max-content;
+  animation: welcomeMarquee 35s linear infinite;
+}
+
+.welcome-sequence {
+  display: flex;
+  align-items: center;
+  gap: clamp(2rem, 5vw, 3.5rem);
+  padding: 1.2rem 1.25rem;
+  flex-shrink: 0;
+}
+
+.welcome-stack {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Montserrat', 'Open Sans', sans-serif;
+  font-weight: 900;
+  font-size: clamp(1.75rem, 4.2vw, 2.9rem);
+  line-height: 1;
+  letter-spacing: 0.02em;
+}
+
+.welcome-line {
+  display: block;
+}
+
+.welcome-stack.fill .welcome-line {
+  color: #0a0a0a;
+}
+
+.welcome-stack.outline .welcome-line {
+  color: transparent;
+  -webkit-text-stroke: 1.8px #1a1a1a;
+}
+
+@keyframes welcomeMarquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+.cal-mission-band {
+  background: linear-gradient(90deg, #0d4ecf 0%, #05080d 100%);
+  padding: clamp(3rem, 6.5vw, 4.6rem) 1.5rem;
+  text-align: center;
+  color: #ffffff;
+}
+
+.cal-mission-inner {
+  max-width: 920px;
+  margin: 0 auto;
+}
+
+.cal-mission-title {
+  margin: 0 0 1rem;
+  font-size: clamp(1.75rem, 4vw, 2.75rem);
+  font-weight: 800;
+  line-height: 1.15;
+  font-family: 'Montserrat', 'Open Sans', sans-serif;
+}
+
+.cal-mission-sub {
+  margin: 0 0 1.75rem;
+  font-size: 1.05rem;
+  line-height: 1.55;
+  opacity: 0.95;
+}
+
+.cal-btn-gold {
+  display: inline-flex;
+  align-items: center;
+  background: #e5a11a !important;
+  color: #111111 !important;
+  border-color: #e5a11a !important;
+  padding: 0.95rem 2.25rem !important;
+}
+
+.cal-btn-gold:hover {
+  background: #f0b32e !important;
+  transform: translateY(-2px);
+}
+
+.cal-connect-section {
+  padding-top: 5rem;
+  padding-bottom: 5rem;
+}
+
+.cal-section-heading {
+  margin: 0 0 0.75rem;
+  font-size: clamp(1.85rem, 3.5vw, 2.5rem);
+  font-weight: 800;
+  font-family: 'Montserrat', 'Open Sans', sans-serif;
+  color: #0a0a0a;
+}
+
+.cal-connect-lead {
+  max-width: 720px;
+  margin: 0 auto 2.5rem;
+  color: #333;
+  line-height: 1.6;
+  font-size: 1.05rem;
+}
+
+.cal-ministry-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+.cal-ministry-card {
+  position: relative;
+  min-height: 430px;
+  background-size: cover;
+  background-position: center;
+  border-radius: 0;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  text-decoration: none;
+  color: inherit;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.cal-ministry-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.18);
+}
+
+.cal-ministry-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.82) 0%, transparent 55%);
+  z-index: 0;
+}
+
+.cal-ministry-card-inner {
+  position: relative;
+  z-index: 1;
+  padding: 2.1rem 1.45rem;
+  text-align: center;
+  color: #ffffff;
+}
+
+.cal-ministry-card-inner h4 {
+  margin: 0 0 0.35rem;
+  font-size: 1.9rem;
+  font-weight: 800;
+  font-family: 'Montserrat', 'Open Sans', sans-serif;
+}
+
+.cal-ministry-card-inner p {
+  margin: 0 0 1rem;
+  font-size: 0.95rem;
+  opacity: 0.95;
+}
+
+.cal-ministry-btn {
+  background: #0d4ecf !important;
+  color: #ffffff !important;
+  border-color: #0d4ecf !important;
+  padding: 0.65rem 1.5rem !important;
+  font-size: 0.72rem !important;
+}
+
+.cal-ministry-btn:hover {
+  background: #0a3ea3 !important;
+}
+
+.cal-triptych {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  min-height: 340px;
+}
+
+.cal-tile {
+  position: relative;
+  background-size: cover;
+  background-position: center;
+  text-decoration: none;
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 300px;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.cal-tile-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.45);
+  transition: background 0.25s ease;
+}
+
+.cal-tile:hover .cal-tile-overlay {
+  background: rgba(0, 0, 0, 0.55);
+}
+
+.cal-tile:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.14);
+}
+
+.cal-tile-content {
+  position: relative;
+  z-index: 1;
+  text-align: center;
+  padding: 1.5rem;
+}
+
+.cal-tile-content h3 {
+  margin: 0 0 1rem;
+  font-size: clamp(1.75rem, 3vw, 2.5rem);
+  font-weight: 800;
+  font-family: 'Montserrat', 'Open Sans', sans-serif;
+  color: #ffffff;
+}
+
+.cal-tile-link {
+  font-size: 0.9rem;
+  font-weight: 600;
+  opacity: 0.95;
+}
+
+.cal-promo-banner {
+  position: relative;
+  min-height: 290px;
+  display: grid;
+  align-items: center;
+  overflow: hidden;
+}
+
+.cal-promo-bg {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(125deg, #f8d4dc 0%, #c5d9e8 45%, #9bb8d4 100%);
+  opacity: 0.95;
+}
+
+.cal-promo-inner {
+  position: relative;
+  z-index: 1;
+  text-align: center;
+  padding: 2.6rem 1.5rem;
+}
+
+.cal-promo-kicker {
+  margin: 0 0 0.5rem;
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: #333;
+  font-weight: 700;
+}
+
+.cal-promo-title {
+  margin: 0 0 1.5rem;
+  font-size: clamp(1.85rem, 4vw, 3rem);
+  font-weight: 800;
+  color: #111;
+  font-family: 'Montserrat', 'Open Sans', sans-serif;
+}
+
+.cal-promo-cta {
+  border-color: #111 !important;
+  color: #111 !important;
+}
+
+.cal-promo-cta:hover {
+  background: rgba(0, 0, 0, 0.08) !important;
+}
+
+.cal-more-ministries {
+  position: relative;
+  min-height: 360px;
+  display: grid;
+  align-items: center;
+}
+
+.cal-more-ministries-bg {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center center;
+}
+
+.cal-more-ministries-bg::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.62);
+}
+
+.cal-more-ministries-content {
+  position: relative;
+  z-index: 1;
+  max-width: 620px;
+  padding: 3.2rem 0;
+  color: #ffffff;
+  text-align: left;
+}
+
+.cal-kicker-light {
+  margin: 0 0 0.5rem;
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  opacity: 0.95;
+}
+
+.cal-more-title {
+  margin: 0 0 1rem;
+  font-size: clamp(1.75rem, 3.5vw, 2.6rem);
+  font-weight: 800;
+  font-family: 'Montserrat', 'Open Sans', sans-serif;
+  line-height: 1.15;
+  color: #ffffff;
+}
+
+.cal-more-copy {
+  margin: 0 0 1.5rem;
+  line-height: 1.55;
+  opacity: 0.95;
+  font-size: 1rem;
+  color: rgba(255, 255, 255, 0.92);
+  max-width: 520px;
+}
+
+.cal-ghost-light {
+  border-color: rgba(255, 255, 255, 0.85) !important;
+  color: #ffffff !important;
+  padding: 0.75rem 1.5rem !important;
+}
+
+.cal-home-events {
+  background: #ececec;
+  padding: 4rem 0;
+}
+
+.cal-label-dark {
+  color: #555 !important;
+}
+
+.cal-events-intro {
+  max-width: 640px;
+  margin: 0 auto 2.2rem;
+  color: #333;
+  line-height: 1.55;
+}
+
+.cal-event-cards {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1rem;
+  text-align: left;
+}
+
+.cal-event-card {
+  background: #ffffff;
+  border-radius: 0;
+  overflow: hidden;
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.08);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.cal-event-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.12);
+}
+
+.cal-event-card-top {
+  position: relative;
+  min-height: 150px;
+  padding: 1.35rem;
+  color: #ffffff;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 0.35rem;
+  background-size: cover;
+  background-position: center;
+}
+
+.cal-event-card-top::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.35);
+  z-index: 0;
+}
+
+.cal-event-card-top strong,
+.cal-event-card-top span {
+  position: relative;
+  z-index: 1;
+}
+
+.cal-event-card-top strong {
+  font-size: 1.05rem;
+  display: block;
+}
+
+.cal-event-card-top span {
+  font-size: 0.82rem;
+  opacity: 0.95;
+}
+
+.cal-event-top-a {
+  background-color: #0d7a8c; /* fallback if background image fails to load */
+}
+
+.cal-event-top-b {
+  background-color: #1a2744; /* fallback if background image fails to load */
+}
+
+.cal-event-top-c {
+  background-color: #0d4ecf; /* fallback if background image fails to load */
+}
+
+.cal-event-card-body {
+  padding: 1.1rem 1.25rem;
+}
+
+.cal-event-card-body p {
+  margin: 0;
+  font-weight: 700;
+  color: #111;
+  font-size: 0.95rem;
+}
+
+.cal-view-events {
+  display: inline-block;
+  margin-top: 2rem;
+  font-weight: 700;
+  color: #0d4ecf;
+  text-decoration: none;
+}
+
+.cal-view-events:hover {
+  text-decoration: underline;
+}
+
+.cal-sermons--full {
+  background: #0d47b5;
+  padding: 3.7rem 0;
+}
+
+.cal-sermons-row {
+  display: grid;
+  grid-template-columns: 0.95fr 1.25fr;
+  gap: 1.8rem;
+  align-items: center;
+}
+
+.cal-sermons-copy {
+  color: #ffffff;
+  text-align: left;
+  max-width: 460px;
+  padding-right: 0.35rem;
+}
+
+.cal-label-on-blue {
+  color: rgba(255, 255, 255, 0.9) !important;
+}
+
+.cal-sermons-heading {
+  margin: 0 0 1rem;
+  font-size: clamp(2rem, 3.2vw, 2.9rem);
+  font-weight: 800;
+  color: #ffffff;
+  font-family: 'Montserrat', 'Open Sans', sans-serif;
+}
+
+.cal-sermons-text {
+  margin: 0 0 1.5rem;
+  line-height: 1.55;
+  opacity: 0.95;
+  font-size: 0.98rem;
+}
+
+.cal-btn-white {
+  display: inline-flex;
+  align-items: center;
+  background: #ffffff !important;
+  color: #111111 !important;
+  border-color: #ffffff !important;
+  border-radius: 0;
+  padding: 0.75rem 1.35rem !important;
+  font-weight: 800;
+  font-size: 0.76rem !important;
+}
+
+.cal-btn-white:hover {
+  background: #f0f0f0 !important;
+}
+
+.cal-sermon-gallery {
+  display: flex;
+  gap: 0.45rem;
+  justify-content: flex-end;
+  align-items: stretch;
+}
+
+.cal-sermon-img {
+  width: min(31.5%, 210px);
+  min-width: 165px;
+  height: 275px;
+  object-fit: cover;
+  border-radius: 0;
+  box-shadow: none;
+}
+
+@media (max-width: 980px) {
+  .cal-sermons-row {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+
+  .cal-sermon-gallery {
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .cal-sermon-img {
+    width: min(31%, 180px);
+    min-width: 150px;
+    height: 235px;
+  }
+}
+
+.footer-cal {
+  background: #000000;
+  color: #ffffff;
+  padding: 3.5rem 0 2rem;
+}
+
+.footer-cal-grid {
+  display: grid;
+  grid-template-columns: 1.2fr repeat(3, 1fr);
+  gap: 2rem;
+  padding-bottom: 2.5rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.footer-cal-logo {
+  border-radius: 50%;
+  display: block;
+  margin-bottom: 0.75rem;
+}
+
+.footer-cal-name {
+  margin: 0 0 1rem;
+  font-weight: 700;
+  font-size: 1rem;
+}
+
+.footer-cal-social {
+  display: flex;
+  gap: 0.75rem;
+}
+
+.footer-cal-social a {
+  width: 32px;
+  height: 32px;
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  color: #e5a11a;
+  font-size: 0.7rem;
+  text-decoration: none;
+}
+
+.footer-cal-col h4 {
+  margin: 0.35rem 0 0.4rem;
+  font-size: 0.95rem;
+}
+
+.footer-cal-col p,
+.footer-cal-col a {
+  margin: 0;
+  color: rgba(255, 255, 255, 0.88);
+  font-size: 0.9rem;
+  text-decoration: none;
+}
+
+.footer-cal-col a:hover {
+  text-decoration: underline;
+}
+
+.footer-cal-icon {
+  font-size: 1rem;
+  opacity: 0.85;
+}
+
+.footer-cal-nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.25rem;
+  padding: 1.75rem 0;
+}
+
+.footer-cal-nav a {
+  color: #ffffff;
+  text-decoration: none;
+  font-size: 0.88rem;
+  font-weight: 600;
+}
+
+.footer-cal-nav a:hover {
+  text-decoration: underline;
+}
+
+.footer-cal-bottom {
+  padding-top: 0.5rem;
+}
+
+.footer-cal-bottom p {
+  margin: 0;
+  font-size: 0.8rem;
+  color: rgba(255, 255, 255, 0.55);
+}
+
+.cal-center {
+  text-align: center;
+}
+
+.cal-subcopy {
+  max-width: 760px;
+  margin: 0.6rem auto 0;
+}
+
+.cal-sermons-layout {
+  display: grid;
+  grid-template-columns: 1.1fr 1fr;
+  gap: 1.3rem;
+  align-items: start;
+}
+
+.cal-sermon-cards {
+  display: grid;
+  gap: 0.9rem;
+}
+
+.hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(56, 73, 89, 0.62);
+}
+
+.hero-content {
+  position: relative;
+  z-index: 1;
+  text-align: center;
+  color: var(--nlcf-white);
+  padding-top: 95px;
+}
+
+.hero h2 {
+  font-size: clamp(2.2rem, 5vw, 3.2rem);
+  margin: 0.4rem 0 1rem;
+  color: var(--nlcf-white);
+  text-transform: lowercase;
+  font-weight: 800;
+  font-family: 'Montserrat', 'Open Sans', sans-serif;
+}
+
+.hero p {
+  max-width: 900px;
+  margin-inline: auto;
+  color: var(--nlcf-mist);
+  line-height: 1.6;
+}
+
+.hero-description {
+  font-size: 1.03rem;
+  opacity: 0.94;
+}
+
+.tagline {
+  font-size: 0.76rem;
+  letter-spacing: 0.11em;
+  font-weight: 700;
+  color: var(--nlcf-mist);
+  opacity: 0.95;
+  font-family: 'Montserrat', 'Open Sans', sans-serif;
+}
+
+.hero-actions {
+  margin-top: 2.2rem;
+  display: flex;
+  justify-content: center;
+  gap: 2.4rem;
+  flex-wrap: wrap;
+}
+
+.button {
+  border: 1px solid transparent;
+  border-radius: 0;
+  padding: 0.84rem 3.8rem;
+  font-weight: 700;
+  font-size: 0.74rem;
+  letter-spacing: 0.05em;
+  cursor: pointer;
+  text-decoration: none;
+  transition: all 0.2s ease;
+  font-family: 'Montserrat', 'Open Sans', sans-serif;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 44px;
+}
+
+.button.primary {
+  background: #0d4ecf;
+  color: var(--nlcf-white);
+  border-color: #0d4ecf;
+}
+
+.button.secondary {
+  background: var(--nlcf-white);
+  border-color: var(--nlcf-steel);
+  color: var(--nlcf-slate);
+}
+
+.button.outline {
+  border-color: rgba(255, 255, 255, 0.82);
+  color: var(--nlcf-white);
+  background: transparent;
+}
+
+.button.outline:hover {
+  background: rgba(255, 255, 255, 0.2);
+  transform: translateY(-2px);
+  box-shadow: 0 14px 32px rgba(0, 0, 0, 0.22);
+}
+
+.button.primary:hover {
+  background: #0a3ea3;
+  transform: translateY(-2px);
+  box-shadow: 0 14px 32px rgba(0, 0, 0, 0.22);
+}
+
+.button:focus-visible,
+a:focus-visible {
+  outline: 3px solid #0d4ecf;
+  outline-offset: 3px;
+}
+
+.button:active {
+  transform: translateY(-1px) scale(0.99);
+}
+
+.hero-meta {
+  margin-top: 2.2rem;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 1.8rem;
+  font-size: 0.92rem;
+  opacity: 0.95;
+}
+
+.section {
+  padding: 82px 0;
+  background: var(--nlcf-white);
+}
+
+.page-section {
+  padding-top: 130px;
+}
+
+.narrow {
+  width: min(760px, 93%);
+}
+
+.section.alt {
+  background: linear-gradient(180deg, var(--nlcf-mist) 0%, #d8d8d8 100%);
+}
+
+.section h3 {
+  margin-top: 0;
+  margin-bottom: 0.75rem;
+  font-size: clamp(1.5rem, 3vw, 2rem);
+  color: var(--nlcf-slate);
+  font-family: 'Montserrat', 'Open Sans', sans-serif;
+}
+
+.section > .container > p {
+  color: var(--nlcf-slate);
+  max-width: 760px;
+}
+
+.section-label {
+  margin: 0 0 0.5rem;
+  color: var(--nlcf-steel);
+  font-size: 0.77rem;
+  text-transform: uppercase;
+  letter-spacing: 0.09em;
+  font-weight: 700;
+  font-family: 'Montserrat', 'Open Sans', sans-serif;
+}
+
+.cards {
+  margin-top: 1.4rem;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+  gap: 1.1rem;
+}
+
+.card {
+  background: var(--nlcf-white);
+  border: 1px solid var(--nlcf-mist);
+  border-radius: 16px;
+  padding: 1.2rem;
+  box-shadow: 0 10px 26px rgba(0, 0, 0, 0.08);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.card::before {
+  content: '';
+  position: absolute;
+  inset: 0 auto auto 0;
+  width: 100%;
+  height: 3px;
+  background: linear-gradient(90deg, var(--nlcf-steel), var(--nlcf-sky));
+  transform: scaleX(0);
+  transform-origin: left center;
+  transition: transform 0.22s ease;
+}
+
+.card h4 {
+  margin-top: 0;
+  margin-bottom: 0.5rem;
+  color: var(--nlcf-slate);
+  font-family: 'Montserrat', 'Open Sans', sans-serif;
+}
+
+.card p {
+  color: var(--nlcf-slate);
+}
+
+.card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 16px 32px rgba(0, 0, 0, 0.16);
+}
+
+.card:hover::before {
+  transform: scaleX(1);
+}
+
+.card a {
+  color: var(--nlcf-steel);
+  font-weight: 600;
+  text-decoration: none;
+  transition: color 0.18s ease;
+}
+
+.card a:hover {
+  color: var(--nlcf-slate);
+}
+
+.status-message {
+  margin-top: 1.1rem;
+  color: var(--nlcf-slate);
+}
+
+.status-message.error {
+  color: #1f1f1f;
+}
+
+.events-hero {
+  position: relative;
+  height: 290px;
+  background-image: url('https://images.unsplash.com/photo-1519671482749-fd09be7ccebf?auto=format&fit=crop&w=1900&q=80');
+  background-size: cover;
+  background-position: center;
+  margin-top: 70px;
+}
+
+.events-hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.48);
+}
+
+.events-hero-content {
+  position: relative;
+  z-index: 1;
+  height: 100%;
+  display: flex;
+  align-items: flex-end;
+  padding-bottom: 32px;
+}
+
+.events-hero-content h2 {
+  margin: 0;
+  font-size: clamp(2rem, 4vw, 3.8rem);
+  color: var(--nlcf-white);
+  font-family: 'Montserrat', 'Open Sans', sans-serif;
+}
+
+.events-content {
+  background: #f0f0f0;
+}
+
+/* Media page */
+.media-hero {
+  position: relative;
+  height: 320px;
+  margin-top: 70px;
+  background-size: cover;
+  background-position: center;
+}
+
+.media-hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+}
+
+.media-hero-content {
+  position: relative;
+  z-index: 1;
+  height: 100%;
+  display: flex;
+  align-items: flex-end;
+  padding-bottom: 34px;
+}
+
+.media-hero-content h2 {
+  margin: 0;
+  color: #fff;
+  font-size: clamp(2.2rem, 4.8vw, 4rem);
+  font-family: 'Montserrat', 'Open Sans', sans-serif;
+}
+
+.media-section {
+  background: #ececec;
+}
+
+.media-grid {
+  margin-top: 1.8rem;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.85rem;
+}
+
+.media-card {
+  position: relative;
+  min-height: 280px;
+  background-size: cover;
+  background-position: center;
+  text-decoration: none;
+  overflow: hidden;
+  display: block;
+}
+
+.media-card-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.76), rgba(0, 0, 0, 0.24));
+}
+
+.media-card-content {
+  position: absolute;
+  inset: auto 0 0 0;
+  z-index: 1;
+  padding: 1.2rem;
+  text-align: center;
+  color: #fff;
+}
+
+.media-card-content h4 {
+  margin: 0 0 0.75rem;
+  color: #fff;
+  font-size: 2rem;
+  font-family: 'Montserrat', 'Open Sans', sans-serif;
+}
+
+.contact-form {
+  margin-top: 1.2rem;
+  display: grid;
+  gap: 0.9rem;
+  max-width: 620px;
+}
+
+.contact-form input,
+.contact-form textarea {
+  font: inherit;
+  padding: 0.9rem 1rem;
+  border-radius: 12px;
+  border: 1px solid var(--nlcf-steel);
+  background: var(--nlcf-white);
+  transition: border-color 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
+}
+
+.contact-form input:hover,
+.contact-form textarea:hover {
+  transform: translateY(-1px);
+}
+
+.contact-form textarea {
+  resize: vertical;
+  min-height: 140px;
+}
+
+.contact-form input:focus,
+.contact-form textarea:focus {
+  outline: none;
+  border-color: var(--nlcf-sky);
+  box-shadow: 0 0 0 3px rgba(122, 122, 122, 0.25);
+}
+
+.feedback {
+  margin-top: 0.8rem;
+  font-weight: 600;
+}
+
+.feedback.success {
+  color: #1f1f1f;
+}
+
+.feedback.error {
+  color: #1f1f1f;
+}
+
+.footer {
+  background: var(--nlcf-slate);
+  color: var(--nlcf-mist);
+  padding: 36px 0;
+}
+
+.footer-content {
+  display: flex;
+  justify-content: space-between;
+  gap: 1.2rem;
+  flex-wrap: wrap;
+}
+
+.footer-title {
+  margin: 0 0 0.3rem;
+  font-size: 1rem;
+  font-weight: 700;
+  font-family: 'Montserrat', 'Open Sans', sans-serif;
+}
+
+.footer-content p {
+  margin: 0.2rem 0;
+  opacity: 0.9;
+}
+
+.footer-links {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.footer-links a {
+  color: var(--nlcf-mist);
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 0.9rem;
+  transition: color 0.18s ease;
+}
+
+.footer-links a:hover {
+  color: var(--nlcf-white);
+}
+
+.footer.footer-cal {
+  background: #000000;
+  color: #ffffff;
+  padding: 3.5rem 0 2rem;
+}
+
+@media (max-width: 900px) {
+  .cal-ministry-grid,
+  .cal-triptych,
+  .cal-event-cards {
+    grid-template-columns: 1fr;
+  }
+
+  .cal-ministry-card {
+    min-height: 340px;
+  }
+
+  .cal-sermons-row {
+    grid-template-columns: 1fr;
+    text-align: center;
+  }
+
+  .cal-sermons-copy {
+    text-align: center;
+  }
+
+  .cal-sermon-gallery {
+    justify-content: center;
+  }
+
+  .cal-sermon-img {
+    width: 30%;
+    max-width: 160px;
+  }
+
+  .media-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .footer-cal-grid {
+    grid-template-columns: 1fr;
+    text-align: center;
+  }
+
+  .footer-cal-brand {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .footer-cal-social {
+    justify-content: center;
+  }
+}
+
+@media (max-width: 760px) {
+  .nav {
+    padding: 14px 0;
+    min-height: auto;
+    align-items: center;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+  }
+
+  .brand-copy {
+    margin-right: 0;
+  }
+
+  .brand-wordmark {
+    font-size: 0.68rem;
+    letter-spacing: 0.03em;
+  }
+
+  .nav nav {
+    display: none;
+    width: 100%;
+    margin-top: 8px;
+    background: var(--nlcf-slate);
+    border: 1px solid rgba(255, 255, 255, 0.28);
+    border-radius: 12px;
+    padding: 10px;
+    justify-content: flex-start;
+    flex-direction: column;
+    gap: 0.35rem;
+  }
+
+  .dropdown {
+    position: static;
+    display: block;
+    background: transparent;
+    box-shadow: none;
+    min-width: 100%;
+    padding: 0.2rem 0 0.45rem;
+    border-radius: 0;
+  }
+
+  .dropdown a {
+    color: var(--nlcf-mist);
+    opacity: 0.95;
+    font-size: 0.72rem;
+    padding: 0.35rem 0.8rem 0.35rem 1.3rem;
+  }
+
+  .nav-group:hover .dropdown {
+    display: block;
+  }
+
+  .nav nav.open {
+    display: flex;
+  }
+
+  .nav nav a {
+    padding: 0.5rem 0.6rem;
+    border-radius: 8px;
+    transition: background 0.18s ease;
+  }
+
+  .nav nav a:hover,
+  .nav nav a.active {
+    background: rgba(255, 255, 255, 0.12);
+  }
+
+  .menu-toggle {
+    display: inline-flex;
+  }
+
+  .hero-content {
+    padding-top: 145px;
+  }
+
+  .cal-hero-content {
+    text-align: center;
+    padding-top: 145px;
+  }
+
+  .cal-feature-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .cal-sermons-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .hero-actions {
+    gap: 0.8rem;
+  }
+
+  .button {
+    width: min(360px, 100%);
+  }
+
+  .hero-meta {
+    gap: 0.8rem;
+    font-size: 0.84rem;
+  }
+
+  .section {
+    padding: 66px 0;
+  }
+
+  .welcome-track {
+    gap: 1.2rem;
+    padding: 1.2rem 0;
+  }
+
+  .events-hero {
+    height: 230px;
+  }
+
+  .media-hero {
+    height: 230px;
+  }
+
+  .media-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero {
+    animation: none;
+  }
+
+  .welcome-track {
+    animation: none;
+  }
+}

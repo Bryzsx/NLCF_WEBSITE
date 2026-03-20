@@ -1,0 +1,27 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&family=Open+Sans:wght@400;500;600;700&display=swap');
+
+:root {
+  --nlcf-slate: #121212;
+  --nlcf-steel: #4a4a4a;
+  --nlcf-sky: #7a7a7a;
+  --nlcf-mist: #e8e8e8;
+  --nlcf-white: #ffffff;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: 'Open Sans', 'Segoe UI', Arial, sans-serif;
+  line-height: 1.5;
+  color: var(--nlcf-slate);
+  background: var(--nlcf-mist);
+}
+
+html {
+  scroll-behavior: smooth;
+}
