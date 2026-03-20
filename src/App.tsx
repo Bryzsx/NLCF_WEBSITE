@@ -18,7 +18,11 @@ type ChurchEvent = {
   description: string;
 };
 
-const apiBaseUrl = import.meta.env.VITE_API_BASE_URL || 'http://localhost:3000';
+// Default API base:
+// - In Vite dev (`npm run dev`), default to the local Django backend port.
+// - In production builds, default to same-origin relative URLs.
+const apiBaseUrl =
+  import.meta.env.VITE_API_BASE_URL || (import.meta.env.DEV ? 'http://localhost:3000' : '');
 
 async function submitContact(payload: ContactPayload) {
   const response = await fetch(`${apiBaseUrl}/contact`, {

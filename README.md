@@ -30,11 +30,11 @@ Frontend starter for a church website inspired by CCF structure, connected to a 
 - Events page fetches:
   - `GET {VITE_API_BASE_URL}/events`
 
-This matches your NestJS-style controller pattern where endpoints are organized by resource.
+This matches the backend API contract your frontend expects (`/contact` and `/events`), regardless of whether you implement it in NestJS or Django.
 
 ## Next recommended steps
 
 - Add real content from your ministry (events, resources, schedules)
 - Add media pages (sermons, podcast, livestream embeds)
-- Add admin/content endpoints in NestJS (for events/resources updates)
-- Add CORS in NestJS for your frontend domain(s)
+- Add admin/content endpoints in Django (for events/resources updates)
+- Add/adjust CORS in Django for your frontend domain(s)
