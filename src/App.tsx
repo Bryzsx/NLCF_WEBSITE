@@ -423,11 +423,11 @@ function HomePage() {
         <div className="hero-overlay cal-hero-overlay--dark" />
         <div className="container cal-hero-content">
           <h2 className="cal-hero-title">
-            Love God.
+            Worship.
             <br />
-            Love People.
+            Grow.
             <br />
-            Change the World.
+            Serve.
           </h2>
           <div className="hero-actions">
             <Link to="/contact" className="button primary">
