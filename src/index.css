@@ -25,3 +25,15 @@ body {
 html {
   scroll-behavior: smooth;
 }
+
+/* Prevent accidental horizontal scrolling from oversized images/collages */
+html,
+body {
+  overflow-x: hidden;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}

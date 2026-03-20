@@ -1419,6 +1419,27 @@ a:focus-visible {
     grid-template-columns: 1fr;
   }
 
+  .cal-triptych {
+    min-height: auto;
+  }
+
+  .cal-tile {
+    min-height: 260px;
+  }
+
+  .cal-tile-content {
+    padding: 1.6rem 1.2rem;
+    gap: 0.8rem;
+  }
+
+  .cal-tile-content h3 {
+    font-size: clamp(1.6rem, 7vw, 2.2rem);
+  }
+
+  .cal-tile-link {
+    font-size: 0.9rem;
+  }
+
   .cal-ministry-card {
     min-height: 340px;
   }
