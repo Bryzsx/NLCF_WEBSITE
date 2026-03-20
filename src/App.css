@@ -1624,3 +1624,151 @@ a:focus-visible {
     animation: none;
   }
 }
+
+.ministry-detail-hero {
+  position: relative;
+  height: 320px;
+  margin-top: 70px;
+  background-size: cover;
+  background-position: center;
+}
+
+.ministry-detail-hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.45);
+}
+
+.ministry-detail-hero-content {
+  position: relative;
+  z-index: 1;
+  height: 100%;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  padding-bottom: 34px;
+  text-align: center;
+}
+
+.ministry-detail-hero-content h2 {
+  margin: 0;
+  color: #ffffff;
+  font-family: 'Montserrat', 'Open Sans', sans-serif;
+  font-weight: 900;
+  font-size: clamp(2.2rem, 5vw, 4rem);
+}
+
+.ministry-detail-section {
+  background: #f0f0f0;
+}
+
+.ministry-first-visit {
+  margin-top: 2rem;
+  background: linear-gradient(180deg, #0d4ecf 0%, #0a3ea3 100%);
+  color: #ffffff;
+  padding: 2.2rem 1.25rem;
+}
+
+.ministry-first-visit-inner {
+  max-width: 760px;
+  margin: 0 auto;
+  display: grid;
+  gap: 1rem;
+  text-align: center;
+}
+
+.ministry-first-visit-inner img {
+  width: 100%;
+  max-width: 920px;
+  margin: 0 auto;
+  object-fit: cover;
+}
+
+.ministry-detail-block {
+  margin-top: 2.2rem;
+  display: grid;
+  gap: 2rem;
+}
+
+.ministry-detail-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  align-items: center;
+}
+
+.ministry-detail-row--reverse {
+  grid-template-columns: 1fr 1fr;
+}
+
+.ministry-detail-row--reverse .ministry-detail-image {
+  order: 2;
+}
+
+.ministry-detail-row--reverse .ministry-detail-text {
+  order: 1;
+}
+
+.ministry-detail-image img {
+  width: 100%;
+  height: 320px;
+  object-fit: cover;
+}
+
+.ministry-detail-text h4 {
+  margin: 0 0 0.75rem;
+  font-size: 1.9rem;
+  font-weight: 900;
+  font-family: 'Montserrat', 'Open Sans', sans-serif;
+  color: #0a0a0a;
+}
+
+.ministry-detail-text p {
+  margin: 0;
+  line-height: 1.7;
+  color: rgba(0, 0, 0, 0.7);
+}
+
+.ministry-upcoming {
+  margin-top: 3rem;
+  background: #0d4ecf;
+  padding: 3.2rem 0;
+  color: #ffffff;
+}
+
+.ministry-upcoming .section-label {
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.ministry-poster {
+  margin-top: 1.5rem;
+  display: flex;
+  justify-content: center;
+}
+
+.ministry-poster img {
+  width: 100%;
+  max-width: 560px;
+  height: auto;
+}
+
+@media (max-width: 900px) {
+  .ministry-detail-row {
+    grid-template-columns: 1fr;
+  }
+
+  .ministry-detail-row--reverse .ministry-detail-image,
+  .ministry-detail-row--reverse .ministry-detail-text {
+    order: initial;
+  }
+
+  .ministry-detail-image img {
+    height: 240px;
+  }
+}
+
+@media (max-width: 760px) {
+  .ministry-detail-hero {
+    height: 230px;
+  }
+}

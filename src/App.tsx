@@ -227,7 +227,7 @@ function Header() {
           </div>
 
           <div className="nav-group">
-            <NavLink to="/connect" onClick={closeMenu} className={navClassName}>
+            <NavLink to="/ministries" onClick={closeMenu} className={navClassName}>
               Ministries
             </NavLink>
             <div className="dropdown">
@@ -758,6 +758,224 @@ function MediaPage() {
   );
 }
 
+type MinistryCard = {
+  key: 'kids' | 'youth' | 'young-adults' | 'worship';
+  title: string;
+  subtitle: string;
+  imageUrl: string;
+  route: string;
+  detailTitle: string;
+  detailBody: string;
+};
+
+function MinistriesPage(props: { selected?: MinistryCard['key'] }) {
+  const ministryCards: MinistryCard[] = [
+    {
+      key: 'kids',
+      title: 'Kids',
+      subtitle: 'Birth - 5th Grade',
+      imageUrl: '/ministry-kids.png',
+      route: '/ministries/kids',
+      detailTitle: 'Kids Ministry',
+      detailBody:
+        'A safe and joyful environment where children learn biblical truth, worship together, and build a strong foundation in Christ.',
+    },
+    {
+      key: 'youth',
+      title: 'Youth',
+      subtitle: '6th - 12th Grade',
+      imageUrl: '/ministry-youth.png',
+      route: '/ministries/youth',
+      detailTitle: 'Youth Ministry',
+      detailBody:
+        'A community for students to grow in faith, build godly friendships, and discover their purpose through discipleship.',
+    },
+    {
+      key: 'young-adults',
+      title: 'Young Adults',
+      subtitle: 'Age 18-25',
+      imageUrl: '/ministry-young-adults.png',
+      route: '/ministries/young-adults',
+      detailTitle: 'Young Adults',
+      detailBody:
+        'Helping young adults navigate life with biblical wisdom through fellowship, mentoring, and Christ-centered teaching.',
+    },
+    // `Worship` can be added once you have the matching image asset.
+    {
+      key: 'worship',
+      title: 'Worship',
+      subtitle: 'Music & Production',
+      imageUrl: '/media-youtube.png',
+      route: '/ministries/worship',
+      detailTitle: 'Worship Ministry',
+      detailBody:
+        'Serving the church through music, production, and creative arts to lead people into heartfelt worship of God.',
+    },
+  ];
+
+  const selectedCard =
+    props.selected && ministryCards.find((c) => c.key === props.selected);
+
+  return (
+    <>
+      <section
+        className="events-hero"
+        style={{ backgroundImage: `url(/hero-home.png)` }}
+      >
+        <div className="events-hero-overlay" />
+        <div className="container events-hero-content">
+          <h2>Ministries</h2>
+        </div>
+      </section>
+
+      <section className="section events-content">
+        <div className="container narrow cal-center">
+          <p className="section-label">OUR MINISTRIES</p>
+          <h3 className="cal-section-heading">There's a Place For You!</h3>
+          <p>
+            No matter who you are or where you’re coming from, there’s a place for
+            you to belong, grow, and make an impact in our community.
+          </p>
+
+          <div className="cal-ministry-grid" style={{ marginTop: '1.8rem' }}>
+            {ministryCards.map((card) => (
+              <article
+                key={card.key}
+                className="cal-ministry-card"
+                style={{ backgroundImage: `url(${card.imageUrl})` }}
+              >
+                <div className="cal-ministry-card-inner">
+                  <h4>{card.title}</h4>
+                  <p>{card.subtitle}</p>
+                  <Link to={card.route} className="button cal-ministry-btn">
+                    Learn More
+                  </Link>
+                </div>
+              </article>
+            ))}
+          </div>
+
+          {selectedCard && (
+            <div style={{ marginTop: '2.2rem' }}>
+              <SimplePage
+                label="Ministries"
+                title={selectedCard.detailTitle}
+                body={selectedCard.detailBody}
+              />
+            </div>
+          )}
+        </div>
+      </section>
+    </>
+  );
+}
+
+function MinistryDetailHero(props: { title: string; imageUrl: string }) {
+  return (
+    <section
+      className="ministry-detail-hero"
+      style={{ backgroundImage: `url(${props.imageUrl})` }}
+    >
+      <div className="ministry-detail-hero-overlay" />
+      <div className="container ministry-detail-hero-content">
+        <h2>{props.title}</h2>
+      </div>
+    </section>
+  );
+}
+
+function MinistryDetailRow(props: {
+  title: string;
+  body: string;
+  imageUrl: string;
+  reverse?: boolean;
+}) {
+  const rowClass = props.reverse
+    ? 'ministry-detail-row ministry-detail-row--reverse'
+    : 'ministry-detail-row';
+
+  return (
+    <div className={rowClass}>
+      <div className="ministry-detail-image">
+        <img src={props.imageUrl} alt="" />
+      </div>
+      <div className="ministry-detail-text">
+        <h4>{props.title}</h4>
+        <p>{props.body}</p>
+      </div>
+    </div>
+  );
+}
+
+function KidsMinistryPage() {
+  const heroImg = '/ministry-kids.png';
+  const nurseryImg = '/ministry-kids.png';
+  const preschoolImg = '/ministry-kids.png';
+  const elementaryImg = '/ministry-kids.png';
+  const firstVisitImg = '/hero-home.png';
+  const posterImg = '/home-sunday-bg.png';
+
+  return (
+    <>
+      <MinistryDetailHero title="Kids" imageUrl={heroImg} />
+
+      <section className="section ministry-detail-section">
+        <div className="container narrow">
+          <p className="section-label">WELCOME TO OUR KIDS MINISTRY</p>
+          <h3 className="cal-section-heading">A Safe Space to Grow</h3>
+          <p className="cal-events-intro" style={{ marginTop: '0.5rem' }}>
+            We’re excited to partner with you as your child learns who God is
+            through age-appropriate teaching, loving leaders, and fun activities.
+          </p>
+
+          <div className="ministry-first-visit">
+            <div className="ministry-first-visit-inner">
+              <h3>Your First Visit</h3>
+              <p>
+                From check-in to classroom time, we’ll help everything feel
+                simple, safe, and welcoming. Bring your family and we’ll take
+                care of the rest.
+              </p>
+              <img src={firstVisitImg} alt="" />
+            </div>
+          </div>
+
+          <div className="ministry-detail-block">
+            <MinistryDetailRow
+              title="Nursery"
+              body="For babies and toddlers: a calm, caring environment with patient leaders who support each child with gentle routines and age-appropriate play."
+              imageUrl={nurseryImg}
+              reverse={false}
+            />
+            <MinistryDetailRow
+              title="Preschool"
+              body="For young kids ready to learn: we focus on Bible stories, worship, and hands-on activities that help them understand God’s love in a simple way."
+              imageUrl={preschoolImg}
+              reverse
+            />
+            <MinistryDetailRow
+              title="Elementary"
+              body="For children building strong faith: we guide them through stories, discussion, and meaningful play so they grow in confidence and character."
+              imageUrl={elementaryImg}
+              reverse={false}
+            />
+          </div>
+
+          <section className="ministry-upcoming">
+            <div className="container cal-center">
+              <p className="section-label">Upcoming Events</p>
+              <h3 className="cal-section-heading">Family Moments</h3>
+              <div className="ministry-poster">
+                <img src={posterImg} alt="" />
+              </div>
+            </div>
+          </section>
+        </div>
+      </section>
+    </>
+  );
+}
+
 function EventsPage() {
   const [events, setEvents] = useState<ChurchEvent[]>([]);
   const [status, setStatus] = useState<'loading' | 'ready' | 'error'>('loading');
@@ -866,44 +1084,29 @@ function App() {
               />
             }
           />
+          <Route path="/ministries" element={<MinistriesPage />} />
           <Route
             path="/ministries/kids"
             element={
-              <SimplePage
-                label="Ministries"
-                title="Kids Ministry"
-                body="A safe and joyful environment where children learn biblical truth, worship together, and build a strong foundation in Christ."
-              />
+              <KidsMinistryPage />
             }
           />
           <Route
             path="/ministries/youth"
             element={
-              <SimplePage
-                label="Ministries"
-                title="Youth Ministry"
-                body="A community for students to grow in faith, build godly friendships, and discover their purpose through discipleship."
-              />
+              <MinistriesPage selected="youth" />
             }
           />
           <Route
             path="/ministries/young-adults"
             element={
-              <SimplePage
-                label="Ministries"
-                title="Young Adults"
-                body="Helping young adults navigate life with biblical wisdom through fellowship, mentoring, and Christ-centered teaching."
-              />
+              <MinistriesPage selected="young-adults" />
             }
           />
           <Route
             path="/ministries/worship"
             element={
-              <SimplePage
-                label="Ministries"
-                title="Worship Ministry"
-                body="Serving the church through music, production, and creative arts to lead people into heartfelt worship of God."
-              />
+              <MinistriesPage selected="worship" />
             }
           />
           <Route
