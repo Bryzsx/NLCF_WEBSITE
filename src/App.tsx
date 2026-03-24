@@ -77,6 +77,67 @@ async function fetchEvents(): Promise<ChurchEvent[]> {
   return data.map(normalizeEvent);
 }
 
+/** Display name for the NLCF youth ministry (used on /ministries/youth and cards). */
+const YOUTH_MINISTRY_NAME = 'Newlife Youth Unlimited';
+
+/** Display name for the young adults ministry (Fortress). */
+const FORTRESS_YOUNG_ADULTS_NAME = 'Fortress (Young Adults)';
+
+const YOUTH_FACEBOOK_URL = 'https://www.facebook.com/newlifeyouthunlimited';
+const YOUTH_INSTAGRAM_URL = 'https://www.instagram.com/newlifeyouthunlimited';
+
+/** All youth ministry photos in `public/youth/` (youth-01 … youth-10). */
+const YOUTH_PHOTO_GALLERY: { path: string; label: string }[] = [
+  { path: '/youth/youth-01.png', label: 'Baptism celebration' },
+  { path: '/youth/youth-02.png', label: 'Baptism in the pool' },
+  { path: '/youth/youth-03.png', label: 'Teaching and discussion' },
+  { path: '/youth/youth-04.png', label: 'Group gathering at Love Con' },
+  { path: '/youth/youth-05.png', label: 'Youth worship night' },
+  { path: '/youth/youth-06.png', label: 'Youth ministry moment' },
+  { path: '/youth/youth-07.png', label: 'Youth community' },
+  { path: '/youth/youth-08.png', label: 'Praying together' },
+  { path: '/youth/youth-09.png', label: 'Youth leaders' },
+  { path: '/youth/youth-10.png', label: 'Pastor Leo' },
+];
+
+const YOUTH_HERO_IMAGE = YOUTH_PHOTO_GALLERY[3].path;
+const YOUTH_WELCOME_SIDE_IMAGE = YOUTH_PHOTO_GALLERY[7].path;
+
+/**
+ * Full-bleed row below Youth Konek service block (youth-10, youth-05, youth-06, no gutters).
+ */
+const YOUTH_SERVICE_PHOTO_ROW: { path: string; label: string }[] = [
+  { path: '/youth/youth-10.png', label: 'Teaching and leadership' },
+  { path: '/youth/youth-05.png', label: 'Youth worship night' },
+  { path: '/youth/youth-06.png', label: 'Youth ministry' },
+];
+
+/** Hero / welcome / card imagery for Fortress (Young Adults) — files live in `public/fortress/`. */
+/** Wide stage group photo — full-bleed hero on /ministries/young-adults */
+const FORTRESS_HERO_IMAGE = '/fortress/fortress-hero-full.png';
+const FORTRESS_WELCOME_SIDE_IMAGE = '/fortress/fortress-welcome-portrait.png';
+
+/** Fortress young adults Facebook group */
+const FORTRESS_FACEBOOK_URL = 'https://www.facebook.com/share/g/1C9KcFsL5S/';
+
+/**
+ * Full-bleed row below the “Get Connected” block (same layout as Youth).
+ */
+const FORTRESS_SERVICE_PHOTO_ROW: { path: string; label: string }[] = [
+  { path: '/fortress/fortress-fellowship-meal.png', label: 'Fellowship and shared meals' },
+  { path: '/fortress/fortress-group-night.png', label: 'Community gatherings' },
+  { path: '/fortress/fortress-worship.png', label: 'Worship together' },
+];
+
+/** Worship ministry — Calvary-style layout using uploaded reference images. */
+const WORSHIP_HERO_IMAGE = '/worship/worship-new-hero.png';
+const WORSHIP_INTRO_SIDE_IMAGE = '/worship/worship-new-split.png';
+const WORSHIP_GALLERY_ROW: { path: string; label: string }[] = [
+  { path: '/worship/worship-new-gallery-1.png', label: 'Worship moment' },
+  { path: '/worship/worship-new-gallery-2.png', label: 'Worship moment' },
+  { path: '/worship/worship-new-gallery-3.png', label: 'Worship moment' },
+];
+
 function ContactForm() {
   const [form, setForm] = useState<ContactPayload>({
     fullName: '',
@@ -238,7 +299,7 @@ function Header() {
                 Youth
               </Link>
               <Link to="/ministries/young-adults" onClick={closeMenu}>
-                Young Adults
+                {FORTRESS_YOUNG_ADULTS_NAME}
               </Link>
               <Link to="/ministries/worship" onClick={closeMenu}>
                 Worship
@@ -411,8 +472,8 @@ function WelcomeMarquee() {
 
 function HomePage() {
   const imgKids = '/ministry-kids.png';
-  const imgYouth = '/ministry-youth.png';
-  const imgYoungAdults = '/ministry-young-adults.png';
+  const imgYouth = YOUTH_HERO_IMAGE;
+  const imgYoungAdults = FORTRESS_HERO_IMAGE;
   const imgKnow = '/tile-know-us.png';
   const imgEvents = '/tile-events.png';
   const imgSteps = '/tile-next-steps.png';
@@ -512,7 +573,6 @@ function HomePage() {
             >
               <div className="cal-ministry-card-inner">
                 <h4>Kids</h4>
-                <p>Birth - 5th Grade</p>
                 <Link to="/ministries/kids" className="button cal-ministry-btn">
                   Learn More
                 </Link>
@@ -523,8 +583,7 @@ function HomePage() {
               style={{ backgroundImage: `url(${imgYouth})` }}
             >
               <div className="cal-ministry-card-inner">
-                <h4>Youth</h4>
-                <p>6th - 12th Grade</p>
+                <h4>{YOUTH_MINISTRY_NAME}</h4>
                 <Link to="/ministries/youth" className="button cal-ministry-btn">
                   Learn More
                 </Link>
@@ -535,8 +594,7 @@ function HomePage() {
               style={{ backgroundImage: `url(${imgYoungAdults})` }}
             >
               <div className="cal-ministry-card-inner">
-                <h4>Young Adults</h4>
-                <p>Age 18-25</p>
+                <h4>{FORTRESS_YOUNG_ADULTS_NAME}</h4>
                 <Link to="/ministries/young-adults" className="button cal-ministry-btn">
                   Learn More
                 </Link>
@@ -761,7 +819,6 @@ function MediaPage() {
 type MinistryCard = {
   key: 'kids' | 'youth' | 'young-adults' | 'worship';
   title: string;
-  subtitle: string;
   imageUrl: string;
   route: string;
   detailTitle: string;
@@ -773,7 +830,6 @@ function MinistriesPage(props: { selected?: MinistryCard['key'] }) {
     {
       key: 'kids',
       title: 'Kids',
-      subtitle: 'Birth - 5th Grade',
       imageUrl: '/ministry-kids.png',
       route: '/ministries/kids',
       detailTitle: 'Kids Ministry',
@@ -782,34 +838,30 @@ function MinistriesPage(props: { selected?: MinistryCard['key'] }) {
     },
     {
       key: 'youth',
-      title: 'Youth',
-      subtitle: '6th - 12th Grade',
-      imageUrl: '/ministry-youth.png',
+      title: 'Newlife Youth Unlimited',
+      imageUrl: YOUTH_HERO_IMAGE,
       route: '/ministries/youth',
-      detailTitle: 'Youth Ministry',
+      detailTitle: 'Newlife Youth Unlimited',
       detailBody:
         'A community for students to grow in faith, build godly friendships, and discover their purpose through discipleship.',
     },
     {
       key: 'young-adults',
-      title: 'Young Adults',
-      subtitle: 'Age 18-25',
-      imageUrl: '/ministry-young-adults.png',
+      title: FORTRESS_YOUNG_ADULTS_NAME,
+      imageUrl: FORTRESS_HERO_IMAGE,
       route: '/ministries/young-adults',
-      detailTitle: 'Young Adults',
+      detailTitle: FORTRESS_YOUNG_ADULTS_NAME,
       detailBody:
-        'Helping young adults navigate life with biblical wisdom through fellowship, mentoring, and Christ-centered teaching.',
+        'Fortress (Young Adults) helps college-aged and young adults grow in faith through Life Groups, meet ups, events, and special services throughout the year—walking with biblical wisdom, mentoring, and Christ-centered community.',
     },
-    // `Worship` can be added once you have the matching image asset.
     {
       key: 'worship',
       title: 'Worship',
-      subtitle: 'Music & Production',
-      imageUrl: '/media-youtube.png',
+      imageUrl: WORSHIP_HERO_IMAGE,
       route: '/ministries/worship',
       detailTitle: 'Worship Ministry',
       detailBody:
-        'Serving the church through music, production, and creative arts to lead people into heartfelt worship of God.',
+        'Our worship teams help the church exalt Jesus in spirit and truth—through music, vocals, audio, and creative arts—so people can encounter God together.',
     },
   ];
 
@@ -846,7 +898,6 @@ function MinistriesPage(props: { selected?: MinistryCard['key'] }) {
               >
                 <div className="cal-ministry-card-inner">
                   <h4>{card.title}</h4>
-                  <p>{card.subtitle}</p>
                   <Link to={card.route} className="button cal-ministry-btn">
                     Learn More
                   </Link>
@@ -870,14 +921,39 @@ function MinistriesPage(props: { selected?: MinistryCard['key'] }) {
   );
 }
 
-function MinistryDetailHero(props: { title: string; imageUrl: string }) {
+function MinistryDetailHero(props: {
+  title: string;
+  imageUrl: string;
+  variant?: 'bottom' | 'center';
+  /** Small line above the title (e.g. “Youth”) */
+  kicker?: string;
+  /** Use tighter typography for longer ministry names */
+  brandLayout?: boolean;
+  /** Tall full-width hero (e.g. Fortress) with stronger overlay */
+  fullView?: boolean;
+}) {
+  const alignClass =
+    props.variant === 'center'
+      ? 'ministry-detail-hero-content ministry-detail-hero-content--center'
+      : 'ministry-detail-hero-content';
+  const sectionClass = [
+    'ministry-detail-hero',
+    'ministry-detail-hero--kids',
+    props.brandLayout ? 'ministry-detail-hero--brand' : '',
+    props.fullView ? 'ministry-detail-hero--fortress-full' : '',
+  ]
+    .filter(Boolean)
+    .join(' ');
+  const overlayClass = props.fullView
+    ? 'ministry-detail-hero-overlay ministry-detail-hero-overlay--strong'
+    : 'ministry-detail-hero-overlay';
   return (
-    <section
-      className="ministry-detail-hero"
-      style={{ backgroundImage: `url(${props.imageUrl})` }}
-    >
-      <div className="ministry-detail-hero-overlay" />
-      <div className="container ministry-detail-hero-content">
+    <section className={sectionClass} style={{ backgroundImage: `url(${props.imageUrl})` }}>
+      <div className={overlayClass} />
+      <div className={`container ${alignClass}`}>
+        {props.kicker ? (
+          <p className="ministry-detail-hero-kicker">{props.kicker}</p>
+        ) : null}
         <h2>{props.title}</h2>
       </div>
     </section>
@@ -886,7 +962,7 @@ function MinistryDetailHero(props: { title: string; imageUrl: string }) {
 
 function MinistryDetailRow(props: {
   title: string;
-  body: string;
+  paragraphs: string[];
   imageUrl: string;
   reverse?: boolean;
 }) {
@@ -901,75 +977,537 @@ function MinistryDetailRow(props: {
       </div>
       <div className="ministry-detail-text">
         <h4>{props.title}</h4>
-        <p>{props.body}</p>
+        {props.paragraphs.map((text, index) => (
+          <p key={index}>{text}</p>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+function NextgenMinistryBanner(props: { tone?: 'black' | 'blue'; phrase?: string }) {
+  const tone = props.tone ?? 'black';
+  const phrase: string = props.phrase ?? 'NEXTGEN MINISTRY';
+  const items = Array.from({ length: 14 }, (_, i) => (
+    <span
+      key={i}
+      className={i % 2 === 0 ? 'kids-nextgen-word outline' : 'kids-nextgen-word solid'}
+    >
+      {phrase}
+    </span>
+  ));
+  const track = (suffix: string) => (
+    <div className="kids-nextgen-track" key={suffix} aria-hidden={suffix === 'b'}>
+      {items}
+    </div>
+  );
+  const dense = phrase.length > 16;
+  const barClass = [
+    tone === 'blue' ? 'kids-nextgen-banner kids-nextgen-banner--blue' : 'kids-nextgen-banner',
+    dense ? 'kids-nextgen-banner--dense' : '',
+  ]
+    .filter(Boolean)
+    .join(' ');
+  return (
+    <div className={barClass} aria-hidden="true">
+      <div className="kids-nextgen-marquee">
+        {track('a')}
+        {track('b')}
       </div>
     </div>
   );
 }
 
 function KidsMinistryPage() {
-  const heroImg = '/ministry-kids.png';
-  const nurseryImg = '/ministry-kids.png';
-  const preschoolImg = '/ministry-kids.png';
-  const elementaryImg = '/ministry-kids.png';
-  const firstVisitImg = '/hero-home.png';
-  const posterImg = '/home-sunday-bg.png';
+  const heroImg = '/kids/kids-01.png';
+  const gallery1 = '/kids/kids-02.png';
+  const gallery2 = '/kids/kids-03.png';
+  const gallery3 = '/kids/kids-04.png';
+  const nurseryImg = '/kids/kids-05.png';
+  const preschoolImg = '/kids/kids-06.png';
+  const elementaryImg = '/kids/kids-07.png';
+  const posterImg = '/kids/kids-08.png';
 
   return (
     <>
-      <MinistryDetailHero title="Kids" imageUrl={heroImg} />
+      <MinistryDetailHero title="Kids" imageUrl={heroImg} variant="center" />
+
+      <section className="kids-welcome">
+        <div className="container narrow cal-center">
+          <h3 className="kids-welcome-title">Welcome to NLCF Kids</h3>
+          <p className="kids-welcome-copy">
+            We’re committed to a clean, safe, fun, and well-staffed place where
+            children can experience God’s love and feel at home.
+          </p>
+          <p className="kids-welcome-copy">
+            Our hope is that every child grows a real relationship with Jesus,
+            builds a biblical foundation, connects with friends and leaders, and
+            loves coming to church.
+          </p>
+        </div>
+      </section>
+
+      <div className="kids-banner-gallery">
+        <NextgenMinistryBanner tone="black" />
+        <div className="kids-photo-strip">
+          <div className="kids-photo-frame">
+            <img src={gallery1} alt="" />
+          </div>
+          <div className="kids-photo-frame">
+            <img src={gallery2} alt="" />
+          </div>
+          <div className="kids-photo-frame">
+            <img src={gallery3} alt="" />
+          </div>
+        </div>
+      </div>
+
+      <section className="kids-first-visit">
+        <div className="kids-first-visit-inner">
+          <h3>Your First Visit</h3>
+          <p>
+            From infants through fifth grade, our team wants your family to have
+            a smooth, excellent experience from the moment you arrive.
+          </p>
+          <p>
+            When you get here, we’ll walk you to the kids area. At first-time
+            check-in, you can share your family details, any allergies, and the
+            best way to reach you during the service.
+          </p>
+          <p>
+            Parents and children receive matching security stickers. If we need
+            you, we’ll contact you by text. Please keep your sticker handy—it’s
+            required when you pick up your child after service.
+          </p>
+        </div>
+      </section>
 
       <section className="section ministry-detail-section">
-        <div className="container narrow">
-          <p className="section-label">WELCOME TO OUR KIDS MINISTRY</p>
-          <h3 className="cal-section-heading">A Safe Space to Grow</h3>
-          <p className="cal-events-intro" style={{ marginTop: '0.5rem' }}>
-            We’re excited to partner with you as your child learns who God is
-            through age-appropriate teaching, loving leaders, and fun activities.
-          </p>
-
-          <div className="ministry-first-visit">
-            <div className="ministry-first-visit-inner">
-              <h3>Your First Visit</h3>
-              <p>
-                From check-in to classroom time, we’ll help everything feel
-                simple, safe, and welcoming. Bring your family and we’ll take
-                care of the rest.
-              </p>
-              <img src={firstVisitImg} alt="" />
-            </div>
-          </div>
-
+        <div className="container">
           <div className="ministry-detail-block">
             <MinistryDetailRow
               title="Nursery"
-              body="For babies and toddlers: a calm, caring environment with patient leaders who support each child with gentle routines and age-appropriate play."
+              paragraphs={[
+                'Your baby is cared for by a loving, well-staffed team in rooms prepared with age-appropriate toys that are cleaned between services.',
+                'We know little ones have unique rhythms. A simple form lets you share feeding, sleep, and changing preferences, and our team prays for your child each week.',
+              ]}
               imageUrl={nurseryImg}
               reverse={false}
             />
             <MinistryDetailRow
               title="Preschool"
-              body="For young kids ready to learn: we focus on Bible stories, worship, and hands-on activities that help them understand God’s love in a simple way."
+              paragraphs={[
+                'Preschoolers engage more each week through Bible stories, crafts, and songs that teach truth in a way they can understand and enjoy.',
+                'They also begin friendships with peers and consistent leaders who cheer them on in faith.',
+              ]}
               imageUrl={preschoolImg}
               reverse
             />
             <MinistryDetailRow
               title="Elementary"
-              body="For children building strong faith: we guide them through stories, discussion, and meaningful play so they grow in confidence and character."
+              paragraphs={[
+                'On weekends, kids experience worship and teaching designed for their age. Midweek often emphasizes small groups so the same leaders walk alongside them.',
+                'Together they explore Scripture, memorize verses, build friendship, and learn what it means to follow Jesus in everyday life.',
+              ]}
               imageUrl={elementaryImg}
               reverse={false}
             />
           </div>
+        </div>
+      </section>
 
-          <section className="ministry-upcoming">
-            <div className="container cal-center">
-              <p className="section-label">Upcoming Events</p>
-              <h3 className="cal-section-heading">Family Moments</h3>
-              <div className="ministry-poster">
-                <img src={posterImg} alt="" />
+      <section className="ministry-upcoming ministry-upcoming--kids">
+        <div className="container cal-center">
+          <p className="section-label">Upcoming Events</p>
+          <h3 className="cal-section-heading">Don’t Miss What’s Next</h3>
+          <p className="ministry-upcoming-lead">
+            Stay connected—check out upcoming kids events built for fun, faith,
+            and friendship.
+          </p>
+          <article className="kids-event-card">
+            <div className="kids-event-poster">
+              <img src={posterImg} alt="" />
+            </div>
+            <div className="kids-event-body">
+              <h4>Spring Family Party</h4>
+              <p className="kids-event-date">
+                <span className="kids-event-date-icon" aria-hidden>
+                  ◷
+                </span>
+                April 1, 2026
+              </p>
+            </div>
+          </article>
+        </div>
+      </section>
+    </>
+  );
+}
+
+function YouthMinistryPage() {
+  const [youthEvents, setYouthEvents] = useState<ChurchEvent[]>([]);
+  const [youthEventsStatus, setYouthEventsStatus] = useState<'loading' | 'ready' | 'error'>(
+    'loading',
+  );
+
+  useEffect(() => {
+    let active = true;
+
+    const load = async () => {
+      try {
+        const response = await fetchEvents();
+        if (!active) {
+          return;
+        }
+        setYouthEvents(response);
+        setYouthEventsStatus('ready');
+      } catch {
+        if (!active) {
+          return;
+        }
+        setYouthEventsStatus('error');
+      }
+    };
+
+    load();
+
+    return () => {
+      active = false;
+    };
+  }, []);
+
+  return (
+    <>
+      <MinistryDetailHero
+        title={YOUTH_MINISTRY_NAME}
+        imageUrl={YOUTH_HERO_IMAGE}
+        variant="center"
+        brandLayout
+      />
+
+      <section className="youth-welcome">
+        <div className="container youth-welcome-inner">
+          <div className="youth-welcome-copy">
+            <h3 className="youth-welcome-title">Welcome to {YOUTH_MINISTRY_NAME}</h3>
+            <p>
+              {YOUTH_MINISTRY_NAME} is a community for students in 6th–12th grade to grow in
+              faith, build real friendships, and discover purpose through worship, teaching,
+              and small groups.
+            </p>
+            <p>
+              Follow us for updates, highlights, and ways to stay connected during the week—we
+              can’t wait to see you on Wednesday nights and at special events.
+            </p>
+            <div className="youth-social-row">
+              <a
+                className="button cal-btn-gold youth-social-btn"
+                href={YOUTH_FACEBOOK_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Facebook
+              </a>
+              <a
+                className="button cal-btn-gold youth-social-btn"
+                href={YOUTH_INSTAGRAM_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Instagram
+              </a>
+            </div>
+          </div>
+          <div className="youth-welcome-photo">
+            <img
+              src={YOUTH_WELCOME_SIDE_IMAGE}
+              alt={`${YOUTH_MINISTRY_NAME} — ${YOUTH_PHOTO_GALLERY[7].label}`}
+            />
+          </div>
+        </div>
+      </section>
+
+      <NextgenMinistryBanner
+        tone="blue"
+        phrase={YOUTH_MINISTRY_NAME.toUpperCase()}
+      />
+
+      <section className="youth-service">
+        <div className="container cal-center">
+          <p className="youth-service-label">Youth Konek</p>
+          <h3 className="youth-service-heading">Every Sunday 3:00–6:00pm</h3>
+          <p className="youth-service-note">Lobby doors open at 2:30pm for check in.</p>
+        </div>
+      </section>
+
+      <section
+        className="youth-gallery-wrap youth-gallery-wrap--flush-ui"
+        aria-label={`${YOUTH_MINISTRY_NAME} photo gallery`}
+      >
+        <div
+          className="youth-gallery-fullbleed"
+          aria-label={`${YOUTH_MINISTRY_NAME} photo strip`}
+        >
+          <div className="youth-photo-strip youth-photo-strip--flush">
+            {YOUTH_SERVICE_PHOTO_ROW.map((photo) => (
+              <div className="youth-photo-cell" key={photo.path}>
+                <div className="youth-photo-frame">
+                  <img
+                    src={photo.path}
+                    alt={`${YOUTH_MINISTRY_NAME} — ${photo.label}`}
+                    loading="lazy"
+                  />
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="ministry-upcoming ministry-upcoming--youth">
+        <div className="container cal-center">
+          <h3 className="youth-upcoming-title">Upcoming Events</h3>
+          <p className="ministry-upcoming-lead ministry-upcoming-lead--youth">
+            Discover what&apos;s happening next—join our upcoming youth events to grow in faith,
+            build friendships, and have an unforgettable time!
+          </p>
+
+          {youthEventsStatus === 'loading' && (
+            <p className="youth-events-status">Loading events...</p>
+          )}
+          {youthEventsStatus === 'error' && (
+            <p className="youth-events-status">Could not load events right now.</p>
+          )}
+          {youthEventsStatus === 'ready' && youthEvents.length === 0 && (
+            <p className="youth-events-status">No Events Found</p>
+          )}
+
+          {youthEvents.length > 0 && (
+            <div className="youth-events-grid">
+              {youthEvents.slice(0, 6).map((event) => (
+                <article className="youth-event-card" key={event.id}>
+                  <h4>{event.title}</h4>
+                  <p className="youth-event-card-meta">
+                    <strong>{event.schedule}</strong>
+                  </p>
+                  <p className="youth-event-card-loc">{event.location}</p>
+                  <p className="youth-event-card-desc">{event.description}</p>
+                </article>
+              ))}
+            </div>
+          )}
+        </div>
+      </section>
+    </>
+  );
+}
+
+function FortressYoungAdultsMinistryPage() {
+  const [fortressEvents, setFortressEvents] = useState<ChurchEvent[]>([]);
+  const [fortressEventsStatus, setFortressEventsStatus] = useState<
+    'loading' | 'ready' | 'error'
+  >('loading');
+
+  useEffect(() => {
+    let active = true;
+
+    const load = async () => {
+      try {
+        const response = await fetchEvents();
+        if (!active) {
+          return;
+        }
+        setFortressEvents(response);
+        setFortressEventsStatus('ready');
+      } catch {
+        if (!active) {
+          return;
+        }
+        setFortressEventsStatus('error');
+      }
+    };
+
+    load();
+
+    return () => {
+      active = false;
+    };
+  }, []);
+
+  return (
+    <>
+      <MinistryDetailHero
+        title={FORTRESS_YOUNG_ADULTS_NAME}
+        imageUrl={FORTRESS_HERO_IMAGE}
+        variant="center"
+        brandLayout
+        fullView
+      />
+
+      <section className="youth-welcome">
+        <div className="container youth-welcome-inner">
+          <div className="youth-welcome-copy">
+            <h3 className="youth-welcome-title">
+              Welcome to {FORTRESS_YOUNG_ADULTS_NAME}
+            </h3>
+            <p>
+              {FORTRESS_YOUNG_ADULTS_NAME} is for college-aged and young adults who want to grow in
+              faith through Life Groups, meet ups, events, and special services—walking with biblical
+              wisdom, mentoring, and Christ-centered community.
+            </p>
+            <p>
+              Join our Facebook group for the latest Fortress gatherings, highlights, and ways to stay
+              connected during the week.
+            </p>
+            <div className="youth-social-row">
+              <a
+                className="button cal-btn-gold youth-social-btn"
+                href={FORTRESS_FACEBOOK_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Fortress young adults Facebook group (opens in a new tab)"
+              >
+                Facebook group
+              </a>
+            </div>
+          </div>
+          <div className="youth-welcome-photo">
+            <img
+              src={FORTRESS_WELCOME_SIDE_IMAGE}
+              alt={`${FORTRESS_YOUNG_ADULTS_NAME} — community`}
+            />
+          </div>
+        </div>
+      </section>
+
+      <NextgenMinistryBanner tone="blue" phrase={FORTRESS_YOUNG_ADULTS_NAME.toUpperCase()} />
+
+      <section className="youth-service">
+        <div className="container cal-center">
+          <p className="youth-service-label">Get Connected</p>
+          <h3 className="youth-service-heading">Life Groups, meet ups &amp; special services</h3>
+          <p className="youth-service-note">
+            Times and locations vary—check announcements on Sunday and our Facebook group for
+            what&apos;s coming up next.
+          </p>
+        </div>
+      </section>
+
+      <section
+        className="youth-gallery-wrap youth-gallery-wrap--flush-ui"
+        aria-label={`${FORTRESS_YOUNG_ADULTS_NAME} photo gallery`}
+      >
+        <div
+          className="youth-gallery-fullbleed"
+          aria-label={`${FORTRESS_YOUNG_ADULTS_NAME} photo strip`}
+        >
+          <div className="youth-photo-strip youth-photo-strip--flush">
+            {FORTRESS_SERVICE_PHOTO_ROW.map((photo) => (
+              <div className="youth-photo-cell" key={photo.path}>
+                <div className="youth-photo-frame">
+                  <img
+                    src={photo.path}
+                    alt={`${FORTRESS_YOUNG_ADULTS_NAME} — ${photo.label}`}
+                    loading="lazy"
+                  />
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="ministry-upcoming ministry-upcoming--youth">
+        <div className="container cal-center">
+          <h3 className="youth-upcoming-title">Upcoming Events</h3>
+          <p className="ministry-upcoming-lead ministry-upcoming-lead--youth">
+            Discover what&apos;s happening next—join our upcoming events to grow in faith, build
+            friendships, and stay connected with the church family!
+          </p>
+
+          {fortressEventsStatus === 'loading' && (
+            <p className="youth-events-status">Loading events...</p>
+          )}
+          {fortressEventsStatus === 'error' && (
+            <p className="youth-events-status">Could not load events right now.</p>
+          )}
+          {fortressEventsStatus === 'ready' && fortressEvents.length === 0 && (
+            <p className="youth-events-status">No Events Found</p>
+          )}
+
+          {fortressEvents.length > 0 && (
+            <div className="youth-events-grid">
+              {fortressEvents.slice(0, 6).map((event) => (
+                <article className="youth-event-card" key={event.id}>
+                  <h4>{event.title}</h4>
+                  <p className="youth-event-card-meta">
+                    <strong>{event.schedule}</strong>
+                  </p>
+                  <p className="youth-event-card-loc">{event.location}</p>
+                  <p className="youth-event-card-desc">{event.description}</p>
+                </article>
+              ))}
+            </div>
+          )}
+        </div>
+      </section>
+    </>
+  );
+}
+
+function WorshipMinistryPage() {
+  return (
+    <>
+      <MinistryDetailHero
+        title="Worship"
+        imageUrl={WORSHIP_HERO_IMAGE}
+        variant="center"
+      />
+
+      <section className="worship-split" aria-labelledby="worship-split-heading">
+        <div className="worship-split-grid">
+          <div className="worship-split-copy">
+            <p className="worship-split-label">GET CONNECTED</p>
+            <h2 id="worship-split-heading" className="worship-split-title">
+              Be Part of the Worship Ministry
+            </h2>
+            <p>
+              At NLCF, worship exists to lift Jesus high. When we gather and exalt Him together,
+              something happens in hearts: faith deepens, burdens lift, and people meet God in real
+              ways. Our musicians, singers, and production volunteers use their gifts to help the
+              church respond in spirit and truth—not to rush through a song list, but to help the room
+              follow what God is doing in the moment.
+            </p>
+            <p>
+              If you sense a call to serve through music, vocals, audio, or visuals, we would love to
+              hear from you. Reach out with questions or to take the next step toward joining the team.
+            </p>
+            <div className="worship-split-cta">
+              <Link to="/contact" className="button cal-btn-gold worship-split-btn">
+                Worship application
+              </Link>
+            </div>
+          </div>
+          <div className="worship-split-visual">
+            <img
+              src={WORSHIP_INTRO_SIDE_IMAGE}
+              alt="Worship team leading on stage"
+              loading="lazy"
+            />
+          </div>
+        </div>
+      </section>
+
+      <NextgenMinistryBanner tone="blue" phrase="GET CONNECTED" />
+
+      <section className="worship-gallery-wrap" aria-label="Worship ministry photo gallery">
+        <div className="worship-photo-strip">
+          {WORSHIP_GALLERY_ROW.map((photo, index) => (
+            <div className="worship-photo-cell" key={`worship-gallery-${index}`}>
+              <div className="worship-photo-frame">
+                <img src={photo.path} alt={`Worship — ${photo.label}`} loading="lazy" />
               </div>
             </div>
-          </section>
+          ))}
         </div>
       </section>
     </>
@@ -1091,24 +1629,9 @@ function App() {
               <KidsMinistryPage />
             }
           />
-          <Route
-            path="/ministries/youth"
-            element={
-              <MinistriesPage selected="youth" />
-            }
-          />
-          <Route
-            path="/ministries/young-adults"
-            element={
-              <MinistriesPage selected="young-adults" />
-            }
-          />
-          <Route
-            path="/ministries/worship"
-            element={
-              <MinistriesPage selected="worship" />
-            }
-          />
+          <Route path="/ministries/youth" element={<YouthMinistryPage />} />
+          <Route path="/ministries/young-adults" element={<FortressYoungAdultsMinistryPage />} />
+          <Route path="/ministries/worship" element={<WorshipMinistryPage />} />
           <Route
             path="/missions"
             element={

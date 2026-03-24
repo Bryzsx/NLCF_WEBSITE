@@ -412,16 +412,11 @@
 }
 
 .cal-ministry-card-inner h4 {
-  margin: 0 0 0.35rem;
-  font-size: 1.9rem;
+  margin: 0 0 1rem;
+  font-size: clamp(1.1rem, 3.6vw, 1.9rem);
+  line-height: 1.15;
   font-weight: 800;
   font-family: 'Montserrat', 'Open Sans', sans-serif;
-}
-
-.cal-ministry-card-inner p {
-  margin: 0 0 1rem;
-  font-size: 0.95rem;
-  opacity: 0.95;
 }
 
 .cal-ministry-btn {
@@ -846,9 +841,9 @@
 
   .cal-sermon-img {
     position: static;
-    width: min(31%, 180px);
-    min-width: 150px;
-    height: 235px;
+    width: min(31%, 210px);
+    min-width: 160px;
+    height: 260px;
   }
 
   .cal-sermon-gallery img:nth-child(1),
@@ -857,8 +852,8 @@
     position: static !important;
     left: auto !important;
     top: auto !important;
-    width: min(31%, 180px) !important;
-    height: 235px !important;
+    width: min(31%, 210px) !important;
+    height: 260px !important;
     z-index: auto !important;
   }
 }
@@ -1456,19 +1451,51 @@ a:focus-visible {
 
   .cal-sermons-copy {
     text-align: center;
+    max-width: 100%;
+    padding: 0 0.75rem;
+    margin-left: auto;
+    margin-right: auto;
+    box-sizing: border-box;
+  }
+
+  .cal-sermons-text {
+    overflow-wrap: anywhere;
   }
 
   .cal-tile-content h3 {
     white-space: normal; /* allow wrapping on smaller screens */
   }
 
+  /* Home “Latest Sermons”: larger 3-up on phones/tablets (was ~160px wide) */
   .cal-sermon-gallery {
-    justify-content: center;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 0.5rem;
+    width: 100%;
+    max-width: min(520px, 100%);
+    margin-left: auto;
+    margin-right: auto;
+    padding: 0 0.5rem;
+    box-sizing: border-box;
+    height: auto !important;
+    justify-content: stretch;
   }
 
-  .cal-sermon-img {
-    width: 30%;
-    max-width: 160px;
+  .cal-sermon-gallery .cal-sermon-img,
+  .cal-sermon-gallery img:nth-child(1),
+  .cal-sermon-gallery img:nth-child(2),
+  .cal-sermon-gallery img:nth-child(3) {
+    position: static !important;
+    left: auto !important;
+    top: auto !important;
+    width: 100% !important;
+    max-width: none !important;
+    height: auto !important;
+    aspect-ratio: 3 / 4;
+    min-height: 200px;
+    max-height: min(58vh, 380px);
+    object-fit: cover;
+    z-index: auto !important;
   }
 
   .media-grid {
@@ -1633,10 +1660,45 @@ a:focus-visible {
   background-position: center;
 }
 
+/* Kids page hero: ~40% viewport, title centered like reference */
+.ministry-detail-hero--kids {
+  height: auto;
+  min-height: clamp(280px, 42vh, 520px);
+}
+
 .ministry-detail-hero-overlay {
   position: absolute;
   inset: 0;
   background: rgba(0, 0, 0, 0.45);
+}
+
+/* Fortress / young-adults: tall full-bleed hero (reference layout) */
+.ministry-detail-hero-overlay--strong {
+  background: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0.38) 0%,
+    rgba(0, 0, 0, 0.62) 55%,
+    rgba(0, 0, 0, 0.68) 100%
+  );
+}
+
+.ministry-detail-hero--fortress-full.ministry-detail-hero--kids {
+  min-height: clamp(420px, 72vh, 88vh);
+  height: auto;
+  width: 100%;
+  background-size: cover;
+  background-position: center;
+}
+
+.ministry-detail-hero--fortress-full .ministry-detail-hero-content--center {
+  min-height: clamp(420px, 72vh, 88vh);
+}
+
+.ministry-detail-hero--fortress-full.ministry-detail-hero--brand .ministry-detail-hero-content h2 {
+  font-size: clamp(1.85rem, 4.8vw, 3.15rem);
+  max-width: 22ch;
+  line-height: 1.12;
+  text-shadow: 0 2px 28px rgba(0, 0, 0, 0.5);
 }
 
 .ministry-detail-hero-content {
@@ -1650,12 +1712,648 @@ a:focus-visible {
   text-align: center;
 }
 
+.ministry-detail-hero-content--center {
+  align-items: center;
+  justify-content: center;
+  padding-bottom: 0;
+  min-height: clamp(280px, 42vh, 520px);
+}
+
 .ministry-detail-hero-content h2 {
   margin: 0;
   color: #ffffff;
   font-family: 'Montserrat', 'Open Sans', sans-serif;
   font-weight: 900;
   font-size: clamp(2.2rem, 5vw, 4rem);
+}
+
+.ministry-detail-hero-kicker {
+  margin: 0 0 0.7rem;
+  font-family: 'Montserrat', 'Open Sans', sans-serif;
+  font-size: clamp(0.68rem, 1.6vw, 0.82rem);
+  font-weight: 700;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.ministry-detail-hero--brand .ministry-detail-hero-content h2 {
+  font-size: clamp(1.45rem, 4vw, 2.55rem);
+  max-width: 22ch;
+  margin-left: auto;
+  margin-right: auto;
+  line-height: 1.1;
+}
+
+/* --- Worship ministry page (Calvary-style: hero + split + marquee + 3-up) --- */
+.worship-split {
+  background: #ffffff;
+  padding: 0;
+}
+
+.worship-split-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 56%) minmax(0, 44%);
+  align-items: stretch;
+  min-height: min(520px, 68vh);
+  width: 100%;
+}
+
+.worship-split-copy {
+  padding: clamp(2.75rem, 6vw, 5rem) clamp(1.25rem, 4vw, 2.5rem) clamp(2.75rem, 6vw, 5rem)
+    clamp(1.25rem, 3.2vw, 3rem);
+  width: 100%;
+  max-width: none;
+}
+
+.worship-split-label {
+  margin: 0 0 0.85rem;
+  font-family: 'Montserrat', 'Open Sans', sans-serif;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: rgba(0, 0, 0, 0.42);
+}
+
+.worship-split-title {
+  margin: 0 0 1.25rem;
+  font-size: clamp(1.9rem, 2.8vw, 3rem);
+  font-weight: 800;
+  font-family: 'Montserrat', 'Open Sans', sans-serif;
+  color: #0a0a0a;
+  line-height: 1.08;
+  max-width: none;
+}
+
+.worship-split-copy p {
+  margin: 0 0 1rem;
+  line-height: 1.72;
+  font-size: clamp(0.96rem, 1.05vw, 1.01rem);
+  color: rgba(0, 0, 0, 0.78);
+  max-width: none;
+}
+
+.worship-split-copy p:last-of-type {
+  margin-bottom: 1.5rem;
+}
+
+.worship-split-cta {
+  margin-top: 0.25rem;
+}
+
+.worship-split-btn {
+  font-weight: 700 !important;
+}
+
+.worship-split-visual {
+  position: relative;
+  min-height: 280px;
+  background: #0a0a0a;
+}
+
+.worship-split-visual img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+}
+
+.worship-gallery-wrap {
+  background: #ffffff;
+  padding: 0;
+}
+
+.worship-photo-strip {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 3px;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  background: #ffffff;
+}
+
+.worship-photo-cell {
+  min-width: 0;
+}
+
+.worship-photo-frame {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  min-height: min(34vw, 320px);
+  overflow: hidden;
+  background: #1a1a1a;
+}
+
+.worship-photo-frame img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+}
+
+@media (max-width: 900px) {
+  .worship-split-grid {
+    grid-template-columns: 1fr;
+    min-height: 0;
+  }
+
+  .worship-split-copy {
+    max-width: none;
+    padding: clamp(2.25rem, 5vw, 3rem) clamp(1.25rem, 4vw, 1.5rem);
+    order: 2;
+  }
+
+  .worship-split-visual {
+    order: 1;
+    min-height: min(48vw, 380px);
+    max-height: 420px;
+  }
+}
+
+@media (max-width: 640px) {
+  .worship-photo-strip {
+    grid-template-columns: 1fr;
+  }
+
+  .worship-photo-frame {
+    min-height: min(56vw, 300px);
+    aspect-ratio: 16 / 11;
+  }
+}
+
+/* --- Kids ministry page (reference layout) --- */
+.kids-welcome {
+  background: #ffffff;
+  padding: clamp(3rem, 6vw, 4.5rem) 1.25rem;
+}
+
+.kids-welcome-title {
+  margin: 0 0 1.25rem;
+  font-size: clamp(1.75rem, 3.5vw, 2.35rem);
+  font-weight: 800;
+  font-family: 'Montserrat', 'Open Sans', sans-serif;
+  color: #0a0a0a;
+}
+
+.kids-welcome-copy {
+  margin: 0 0 1rem;
+  max-width: 720px;
+  margin-left: auto;
+  margin-right: auto;
+  line-height: 1.65;
+  color: rgba(0, 0, 0, 0.78);
+  font-size: 1.02rem;
+}
+
+.kids-welcome-copy:last-of-type {
+  margin-bottom: 0;
+}
+
+.kids-nextgen-banner {
+  background: #000000;
+  overflow: hidden;
+  padding: clamp(0.9rem, 2.2vw, 1.35rem) 0;
+}
+
+.kids-nextgen-banner--blue {
+  background: #0d4ecf;
+}
+
+/* Long phrases (e.g. youth ministry name): larger bar + type */
+.kids-nextgen-banner--dense {
+  padding: clamp(1.15rem, 3.2vw, 2rem) 0;
+}
+
+.kids-nextgen-banner--dense .kids-nextgen-word {
+  font-size: clamp(1rem, 2.85vw, 1.55rem);
+  letter-spacing: 0.09em;
+}
+
+.kids-nextgen-banner--dense .kids-nextgen-word.outline {
+  -webkit-text-stroke: 1.45px #ffffff;
+}
+
+.kids-nextgen-banner--dense .kids-nextgen-track {
+  gap: clamp(1rem, 2.4vw, 1.75rem);
+  padding-right: clamp(1rem, 2.4vw, 1.75rem);
+}
+
+.kids-nextgen-marquee {
+  display: flex;
+  width: max-content;
+  animation: kidsNextgenMarquee 36s linear infinite;
+}
+
+.kids-nextgen-track {
+  display: inline-flex;
+  flex-wrap: nowrap;
+  align-items: center;
+  gap: clamp(0.65rem, 1.8vw, 1.15rem);
+  flex-shrink: 0;
+  padding-right: clamp(0.65rem, 1.8vw, 1.15rem);
+}
+
+.kids-nextgen-word {
+  font-family: 'Montserrat', 'Open Sans', sans-serif;
+  font-weight: 800;
+  font-size: clamp(1.1rem, 3.2vw, 1.85rem);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  flex-shrink: 0;
+  white-space: nowrap;
+}
+
+.kids-nextgen-word.solid {
+  color: #ffffff;
+}
+
+.kids-nextgen-word.outline {
+  color: transparent;
+  -webkit-text-stroke: 1.1px #ffffff;
+}
+
+@keyframes kidsNextgenMarquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .kids-nextgen-marquee {
+    animation: none;
+    flex-wrap: wrap;
+    width: 100%;
+    max-width: 100%;
+    justify-content: center;
+  }
+
+  .kids-nextgen-track {
+    flex-wrap: wrap;
+    justify-content: center;
+    padding-right: 0;
+  }
+
+  .kids-nextgen-track:last-child {
+    display: none;
+  }
+}
+
+/* Banner + portrait gallery: white gutters + true 3:4 frames (reference) */
+.kids-banner-gallery {
+  margin: 0;
+  padding: 0;
+  line-height: 0;
+  background: #ffffff;
+}
+
+.kids-banner-gallery .kids-nextgen-banner {
+  line-height: normal;
+}
+
+.kids-photo-strip {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp(16px, 2.2vw, 24px);
+  width: 100%;
+  box-sizing: border-box;
+  background: #ffffff;
+  padding: clamp(20px, 3.5vw, 36px) clamp(18px, 5vw, 56px);
+  margin: 0;
+  align-items: stretch;
+}
+
+/* 3:4 portrait tiles; cap height so layout matches tall reference strips */
+.kids-photo-frame {
+  position: relative;
+  width: 100%;
+  max-width: 100%;
+  aspect-ratio: 3 / 4;
+  max-height: min(78vh, 880px);
+  margin: 0 auto;
+  overflow: hidden;
+  background: #e8eaed;
+}
+
+.kids-photo-frame img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+}
+
+@media (max-width: 900px) {
+  .kids-photo-frame {
+    max-height: min(70vh, 720px);
+  }
+}
+
+@media (max-width: 760px) {
+  .kids-photo-strip {
+    grid-template-columns: 1fr;
+    gap: clamp(16px, 4vw, 22px);
+    padding: clamp(16px, 4vw, 28px) clamp(16px, 5vw, 28px);
+  }
+
+  .kids-photo-frame {
+    max-height: min(68vh, 620px);
+    aspect-ratio: 3 / 4;
+  }
+}
+
+.kids-first-visit {
+  background: #002147;
+  color: #ffffff;
+  padding: clamp(3rem, 6vw, 5rem) clamp(1.25rem, 5vw, 2.5rem);
+}
+
+.kids-first-visit-inner {
+  max-width: 720px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.kids-first-visit-inner h3 {
+  margin: 0 0 1.35rem;
+  font-size: clamp(1.9rem, 3.8vw, 2.65rem);
+  font-weight: 800;
+  font-family: 'Montserrat', 'Open Sans', sans-serif;
+  color: #ffffff;
+  letter-spacing: -0.02em;
+}
+
+.kids-first-visit-inner p {
+  margin: 0 0 1.1rem;
+  line-height: 1.7;
+  font-size: clamp(1rem, 1.5vw, 1.08rem);
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.96);
+  max-width: 52ch;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.kids-first-visit-inner p:last-child {
+  margin-bottom: 0;
+}
+
+/* --- Youth ministry page (Calvary-style reference) --- */
+.youth-welcome {
+  background: #ffffff;
+  padding: clamp(3rem, 6vw, 4.75rem) 0;
+}
+
+.youth-welcome-inner {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: clamp(2rem, 5vw, 3.5rem);
+  align-items: start;
+}
+
+.youth-welcome-title {
+  margin: 0 0 1.25rem;
+  font-size: clamp(1.85rem, 3.8vw, 2.65rem);
+  font-weight: 800;
+  font-family: 'Montserrat', 'Open Sans', sans-serif;
+  color: #0a0a0a;
+  line-height: 1.15;
+}
+
+.youth-welcome-copy p {
+  margin: 0 0 1rem;
+  line-height: 1.7;
+  font-size: clamp(0.98rem, 1.4vw, 1.06rem);
+  color: rgba(0, 0, 0, 0.78);
+}
+
+.youth-welcome-copy p:last-of-type {
+  margin-bottom: 1.35rem;
+}
+
+.youth-social-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem 1rem;
+  margin-top: 0.25rem;
+}
+
+.youth-social-btn {
+  min-width: 8.5rem;
+  justify-content: center;
+  font-weight: 700 !important;
+}
+
+.youth-welcome-photo {
+  position: relative;
+  width: 100%;
+  min-height: min(420px, 52vh);
+  aspect-ratio: 3 / 4;
+  max-height: 640px;
+  overflow: hidden;
+  background: #e8eaed;
+}
+
+.youth-welcome-photo img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+}
+
+.youth-service {
+  background: #ffffff;
+  padding: clamp(2.5rem, 5vw, 3.75rem) 1.25rem;
+  text-align: center;
+}
+
+.youth-service-label {
+  margin: 0 0 0.65rem;
+  font-family: 'Montserrat', 'Open Sans', sans-serif;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: none;
+  color: rgba(0, 0, 0, 0.45);
+}
+
+.youth-service-heading {
+  margin: 0 0 0.5rem;
+  font-size: clamp(1.65rem, 3.2vw, 2.35rem);
+  font-weight: 800;
+  font-family: 'Montserrat', 'Open Sans', sans-serif;
+  color: #0a0a0a;
+}
+
+.youth-service-note {
+  margin: 0;
+  font-size: 0.92rem;
+  color: rgba(0, 0, 0, 0.55);
+}
+
+/* --- Youth gallery: full-bleed 3-up, zero gutter (no heading) --- */
+.youth-gallery-wrap {
+  background: #ffffff;
+  padding: 0;
+}
+
+.youth-gallery-wrap--flush-ui {
+  background: #ffffff;
+}
+
+.youth-gallery-fullbleed {
+  width: 100%;
+  overflow: hidden;
+  background: #0a0a0a;
+}
+
+.youth-photo-strip {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp(14px, 2vw, 22px);
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Calvary-style strip: no gaps between images */
+.youth-photo-strip--flush {
+  gap: 0;
+  padding: 0;
+  margin: 0;
+}
+
+.youth-photo-cell {
+  min-width: 0;
+}
+
+.youth-gallery-fullbleed .youth-photo-frame {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  min-height: min(38vw, 380px);
+  overflow: hidden;
+  background: #1a1a1a;
+  border-radius: 0;
+}
+
+.youth-gallery-fullbleed .youth-photo-frame img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+}
+
+.youth-upcoming-title {
+  margin: 0 0 0.75rem;
+  font-size: clamp(1.85rem, 3.5vw, 2.5rem);
+  font-weight: 800;
+  font-family: 'Montserrat', 'Open Sans', sans-serif;
+  color: #ffffff;
+}
+
+.ministry-upcoming-lead--youth {
+  max-width: 640px;
+}
+
+.youth-events-status {
+  margin: 1.75rem 0 0;
+  font-size: 0.95rem;
+  color: rgba(255, 255, 255, 0.88);
+}
+
+.ministry-upcoming--youth .youth-events-status {
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-size: 0.82rem;
+  font-weight: 600;
+}
+
+.youth-events-grid {
+  margin-top: 2rem;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 1.25rem;
+  text-align: left;
+}
+
+.youth-event-card {
+  background: #ffffff;
+  border: 1px solid rgba(0, 0, 0, 0.12);
+  padding: 1.15rem 1.25rem 1.35rem;
+  color: #0a0a0a;
+}
+
+.youth-event-card h4 {
+  margin: 0 0 0.5rem;
+  font-size: 1.08rem;
+  font-weight: 800;
+  font-family: 'Montserrat', 'Open Sans', sans-serif;
+}
+
+.youth-event-card-meta {
+  margin: 0 0 0.35rem;
+  font-size: 0.9rem;
+  color: rgba(0, 0, 0, 0.65);
+}
+
+.youth-event-card-loc {
+  margin: 0 0 0.5rem;
+  font-size: 0.86rem;
+  color: rgba(0, 0, 0, 0.55);
+}
+
+.youth-event-card-desc {
+  margin: 0;
+  font-size: 0.88rem;
+  line-height: 1.55;
+  color: rgba(0, 0, 0, 0.7);
+}
+
+@media (max-width: 900px) {
+  .youth-welcome-inner {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+
+  .youth-welcome-photo {
+    order: -1;
+    max-height: none;
+    min-height: 280px;
+    aspect-ratio: 16 / 10;
+    max-width: 520px;
+    margin: 0 auto;
+  }
+}
+
+@media (max-width: 640px) {
+  .youth-photo-strip--flush {
+    grid-template-columns: 1fr;
+  }
+
+  .youth-gallery-fullbleed .youth-photo-frame {
+    min-height: min(56vw, 320px);
+    aspect-ratio: 16 / 11;
+  }
 }
 
 .ministry-detail-section {
@@ -1729,11 +2427,95 @@ a:focus-visible {
   color: rgba(0, 0, 0, 0.7);
 }
 
+.ministry-detail-text p + p {
+  margin-top: 1rem;
+}
+
+/* Kids ministry rows: taller portrait-style photos like reference */
+.ministry-detail-section .ministry-detail-image img {
+  height: clamp(320px, 40vw, 520px);
+}
+
 .ministry-upcoming {
   margin-top: 3rem;
   background: #0d4ecf;
   padding: 3.2rem 0;
   color: #ffffff;
+}
+
+.ministry-upcoming--kids {
+  background: #002d72;
+  margin-top: 0;
+  padding: clamp(3rem, 6vw, 4.25rem) 0;
+}
+
+.ministry-upcoming--kids .cal-section-heading {
+  color: #ffffff;
+  margin-top: 0.35rem;
+}
+
+.ministry-upcoming.ministry-upcoming--youth {
+  margin-top: 0;
+  padding: clamp(3rem, 6vw, 4.25rem) 0;
+  background: #0d4ecf;
+}
+
+.ministry-upcoming-lead {
+  margin: 0.75rem auto 0;
+  max-width: 560px;
+  line-height: 1.65;
+  font-size: 1rem;
+  color: rgba(255, 255, 255, 0.92);
+}
+
+.kids-event-card {
+  margin: 2rem auto 0;
+  max-width: min(520px, 92vw);
+  background: #ffffff;
+  border: 1px solid #0a0a0a;
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.18);
+  text-align: left;
+}
+
+.kids-event-poster {
+  width: 100%;
+  background: #0d3d2e;
+  line-height: 0;
+}
+
+.kids-event-poster img {
+  width: 100%;
+  height: auto;
+  display: block;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+}
+
+.kids-event-body {
+  padding: 1.1rem 1.25rem 1.35rem;
+}
+
+.kids-event-body h4 {
+  margin: 0 0 0.5rem;
+  font-size: 1.2rem;
+  font-weight: 800;
+  font-family: 'Montserrat', 'Open Sans', sans-serif;
+  color: #0a0a0a;
+}
+
+.kids-event-date {
+  margin: 0;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.88rem;
+  color: rgba(0, 0, 0, 0.5);
+}
+
+.kids-event-date-icon {
+  font-size: 1rem;
+  line-height: 1;
+  opacity: 0.65;
 }
 
 .ministry-upcoming .section-label {
@@ -1765,10 +2547,27 @@ a:focus-visible {
   .ministry-detail-image img {
     height: 240px;
   }
+
+  .ministry-detail-section .ministry-detail-image img {
+    height: min(320px, 62vw);
+  }
 }
 
 @media (max-width: 760px) {
   .ministry-detail-hero {
     height: 230px;
+  }
+
+  .ministry-detail-hero--kids {
+    height: auto;
+    min-height: 260px;
+  }
+
+  .ministry-detail-hero--fortress-full.ministry-detail-hero--kids {
+    min-height: min(68vh, 560px);
+  }
+
+  .ministry-detail-hero--fortress-full .ministry-detail-hero-content--center {
+    min-height: min(68vh, 560px);
   }
 }
