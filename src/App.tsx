@@ -215,7 +215,7 @@ function Header() {
     isActive ? 'nav-link active' : 'nav-link';
 
   return (
-    <header className="header">
+    <header className={`header${isMenuOpen ? ' header--menu-open' : ''}`}>
       <div className="container nav">
         <Link className="logo-link" to="/">
           <img src={nlcfLogo} alt="NLCF logo" className="logo-image" />
@@ -223,17 +223,22 @@ function Header() {
         <div className="brand-copy">
           <p className="brand-wordmark">New Life In Christ Fellowship</p>
         </div>
-        <button
-          className="menu-toggle"
-          onClick={() => setIsMenuOpen((current) => !current)}
-          aria-label="Toggle navigation menu"
-          aria-expanded={isMenuOpen}
-          type="button"
-        >
-          <span />
-          <span />
-          <span />
-        </button>
+        <div className="nav-secondary">
+          <Link to="/give" className="button nav-give-btn">
+            Give
+          </Link>
+          <button
+            className="menu-toggle"
+            onClick={() => setIsMenuOpen((current) => !current)}
+            aria-label="Toggle navigation menu"
+            aria-expanded={isMenuOpen}
+            type="button"
+          >
+            <span />
+            <span />
+            <span />
+          </button>
+        </div>
         <nav className={isMenuOpen ? 'open' : ''}>
           <div className="nav-group">
             <NavLink to="/" onClick={closeMenu} className={navClassName}>
@@ -344,10 +349,10 @@ function Header() {
               Events
             </NavLink>
           </div>
-          <div className="nav-group">
-            <NavLink to="/give" onClick={closeMenu} className={navClassName}>
+          <div className="nav-group nav-group--give">
+            <Link to="/give" onClick={closeMenu} className="nav-give-link">
               Give
-            </NavLink>
+            </Link>
           </div>
         </nav>
       </div>
@@ -1514,6 +1519,96 @@ function WorshipMinistryPage() {
   );
 }
 
+function WhoWeArePage() {
+  return (
+    <section className="section page-section">
+      <div className="container narrow cal-center">
+        <p className="section-label">Who We Are</p>
+        <h3>A Church Family Centered on Christ</h3>
+        <p>
+          New Life In Christ Fellowship is a Bible-believing church committed to worship,
+          discipleship, and mission. Our heart is to lead people into a growing relationship with
+          Jesus and help families live out God&apos;s purpose together.
+        </p>
+        <h4 style={{ marginTop: '2rem' }}>Our Beliefs</h4>
+        <p>
+          We believe in one God — Father, Son, and Holy Spirit. We believe Jesus Christ is the
+          Son of God, born of a virgin, crucified for our sins, and raised on the third day.
+          Salvation is found in no one else but through faith in Christ alone.
+        </p>
+        <h4 style={{ marginTop: '1.5rem' }}>Our Mission</h4>
+        <p>
+          Helping people grow into wholehearted followers of Jesus — by knowing God, growing
+          together, discovering purpose, and making a difference.
+        </p>
+      </div>
+    </section>
+  );
+}
+
+function GivePage() {
+  const giveHero = '/hero-home.png';
+  return (
+    <>
+      <section
+        className="events-hero"
+        style={{ backgroundImage: `url(${giveHero})` }}
+      >
+        <div className="events-hero-overlay" />
+        <div className="container events-hero-content">
+          <h2>Give</h2>
+        </div>
+      </section>
+
+      <section className="section">
+        <div className="container narrow cal-center">
+          <p className="section-label">Give Now</p>
+          <h3 className="cal-section-heading">We couldn&apos;t do it without you.</h3>
+        </div>
+      </section>
+
+      <section className="section" style={{ background: '#f0f0f0', paddingTop: 0 }}>
+        <div className="container narrow cal-center">
+          <h3 className="give-why-title" style={{ marginTop: 0 }}>The Heart Behind Our Giving</h3>
+          <p>
+            Giving is an act of worship that reflects our gratitude to God for His abundant
+            blessings. It allows us to partner with Him in advancing His Kingdom, supporting the
+            local church, helping those in need, and making a tangible difference in the lives of
+            others.
+          </p>
+          <p>
+            When we give, we demonstrate faith, trust, and obedience, acknowledging that everything
+            we have ultimately belongs to God. Generosity not only blesses others but also transforms
+            our hearts, cultivating contentment, joy, and a deeper dependence on God&apos;s provision.
+          </p>
+        </div>
+      </section>
+
+      <section className="section" style={{ paddingTop: 0 }}>
+        <div className="container cal-center">
+          <div className="give-card">
+            <div className="give-card-body">
+              <h4>Give Online</h4>
+              <p>
+                Giving online is a simple, secure, and convenient way to support the mission and
+                ministries of New Life In Christ Fellowship.
+              </p>
+              <a
+                href="https://www.facebook.com/nlcfofficial"
+                target="_blank"
+                rel="noreferrer"
+                className="button cal-btn-gold give-cta"
+              >
+                Give Now
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+    </>
+  );
+}
+
 function EventsPage() {
   const [events, setEvents] = useState<ChurchEvent[]>([]);
   const [status, setStatus] = useState<'loading' | 'ready' | 'error'>('loading');
@@ -1601,11 +1696,7 @@ function App() {
           <Route
             path="/who-we-are"
             element={
-              <SimplePage
-                label="Who We Are"
-                title="A Church Family Centered on Christ"
-                body="We are a Bible-believing church committed to worship, discipleship, and mission. Our heart is to lead people into a growing relationship with Jesus and help families live out God's purpose together."
-              />
+              <WhoWeArePage />
             }
           />
           <Route
@@ -1616,9 +1707,9 @@ function App() {
             path="/connect"
             element={
               <SimplePage
-                label="Connect"
-                title="Belong to a Discipleship Community"
-                body="Grow through prayer, Bible study, and meaningful fellowship. We can connect this page to your NestJS backend for dynamic community groups and schedules."
+                label="Next Steps"
+                title="Take Your Next Step With Christ"
+                body="Whether you're exploring faith, ready for baptism, or looking to join a Life Group — there's a next step for you. Salvation through Jesus Christ is the beginning of a transformed life. Baptism is a public declaration of your faith. Life Groups help you grow in community. And missions give you a chance to make an eternal impact. Wherever you are in your journey, we're here to walk with you."
               />
             }
           />
@@ -1638,7 +1729,7 @@ function App() {
               <SimplePage
                 label="Missions"
                 title="Pray, Give, and Go"
-                body="Take part in local and global outreach initiatives. This section can later pull mission stories and campaigns from backend APIs."
+                body="We are called to make disciples of all nations. At NLCF, we support local and global missionaries, organize outreach initiatives, and provide opportunities for every believer to be involved in God's mission. Whether through prayer, financial support, or short-term trips, your participation brings the hope of Jesus to communities near and far."
               />
             }
           />
@@ -1652,7 +1743,7 @@ function App() {
               <SimplePage
                 label="Resources"
                 title="Grow with Biblical Materials"
-                body="Access sermon notes, study guides, and growth materials for personal and group discipleship."
+                body="Deepen your faith with curated resources — sermon notes, Bible reading plans, study guides, and devotional materials. Whether you're studying on your own or leading a group, these tools are designed to help you grow in your knowledge and love of God's Word. Check back regularly as we add new content to support your spiritual journey."
               />
             }
           />
@@ -1688,13 +1779,7 @@ function App() {
           />
           <Route
             path="/give"
-            element={
-              <SimplePage
-                label="Give"
-                title="Support the Ministry"
-                body="Partner with us through faithful giving. You can add your official payment channels and stewardship details on this page."
-              />
-            }
+            element={<GivePage />}
           />
           <Route path="/contact" element={<ContactPage />} />
           <Route path="*" element={<HomePage />} />
