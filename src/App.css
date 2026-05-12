@@ -125,32 +125,9 @@
   margin-left: auto;
 }
 
-.nav-give-btn {
-  background: #e5a11a !important;
-  color: #111111 !important;
-  border: none !important;
-  padding: 0.45rem 1.15rem !important;
-  font-size: 0.68rem !important;
-  font-weight: 800 !important;
-  border-radius: 0;
-  letter-spacing: 0.04em;
-  transition: background 0.25s ease, transform 0.25s ease !important;
-  min-height: auto !important;
-}
-
-  .nav-give-btn:hover {
-  background: #f0b32e !important;
-  transform: translateY(-1px);
-}
-
 @media (max-width: 760px) {
   .nav-secondary {
     margin-left: auto;
-  }
-
-  .nav-give-btn {
-    padding: 0.35rem 0.9rem !important;
-    font-size: 0.62rem !important;
   }
 }
 

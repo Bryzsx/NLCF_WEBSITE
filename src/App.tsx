@@ -224,9 +224,6 @@ function Header() {
           <p className="brand-wordmark">New Life In Christ Fellowship</p>
         </div>
         <div className="nav-secondary">
-          <Link to="/give" className="button nav-give-btn">
-            Give
-          </Link>
           <button
             className="menu-toggle"
             onClick={() => setIsMenuOpen((current) => !current)}
@@ -265,29 +262,6 @@ function Header() {
               </Link>
               <Link to="/contact" onClick={closeMenu}>
                 Contact Us
-              </Link>
-            </div>
-          </div>
-
-          <div className="nav-group">
-            <NavLink to="/connect" onClick={closeMenu} className={navClassName}>
-              Next Steps
-            </NavLink>
-            <div className="dropdown">
-              <Link to="/connect" onClick={closeMenu}>
-                Salvation
-              </Link>
-              <Link to="/connect" onClick={closeMenu}>
-                Baptism
-              </Link>
-              <Link to="/resources" onClick={closeMenu}>
-                Bible Reading
-              </Link>
-              <Link to="/connect" onClick={closeMenu}>
-                Life Groups
-              </Link>
-              <Link to="/missions" onClick={closeMenu}>
-                Missions
               </Link>
             </div>
           </div>
@@ -347,6 +321,11 @@ function Header() {
           <div className="nav-group">
             <NavLink to="/events" onClick={closeMenu} className={navClassName}>
               Events
+            </NavLink>
+          </div>
+          <div className="nav-group">
+            <NavLink to="/give" onClick={closeMenu} className={navClassName}>
+              Give
             </NavLink>
           </div>
         </nav>
