@@ -29,6 +29,13 @@ EVENTS = [
         "location": "NLCF Community Hall",
         "description": "A time for encouragement, connection, and growing together as a family.",
     },
+    {
+        "id": "4",
+        "title": "Pastors & Missionaries Gathering",
+        "schedule": "May 30, 2026 • 7:00 AM – 5:00 PM",
+        "location": "NLCF Mother Church",
+        "description": "Calling all Pastors and Missionaries! Be refreshed and renewed with a day of fellowship, prayer, and encouragement. Guest speaker: Rev. Mark Briones.",
+    },
 ]
 
 

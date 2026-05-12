@@ -255,6 +255,9 @@ function Header() {
               <Link to="/who-we-are" onClick={closeMenu}>
                 Meet Our Team
               </Link>
+              <Link to="/connect" onClick={closeMenu}>
+                Next Steps
+              </Link>
             </div>
           </div>
 
@@ -383,8 +386,6 @@ function Footer() {
         </div>
       </div>
       <div className="container footer-cal-nav">
-        <Link to="/who-we-are">New Here</Link>
-        <Link to="/who-we-are">Our Beliefs</Link>
         <Link to="/connect">Ministries</Link>
         <Link to="/connect">Next Steps</Link>
         <Link to="/watch">Media</Link>
@@ -587,7 +588,7 @@ function HomePage() {
             Discover new ways to connect, serve, and grow as you live out your faith
             alongside others at New Life In Christ Fellowship.
           </p>
-          <Link to="/connect" className="button outline cal-ghost-light">
+          <Link to="/ministries" className="button outline cal-ghost-light">
             View All Ministries →
           </Link>
         </div>
@@ -682,6 +683,70 @@ function SimplePage(props: { label: string; title: string; body: string }) {
   );
 }
 
+function ConnectPage() {
+  return (
+    <>
+      <section className="connect-hero" style={{ backgroundImage: `url(/team-hero-bg.png)` }}>
+        <div className="connect-hero-overlay" />
+        <div className="container connect-hero-content">
+          <h2>Next Steps</h2>
+        </div>
+      </section>
+
+      <section className="connect-section">
+        <div className="container">
+          <div className="connect-intro">
+            <p className="section-label">Take Your Next Step With Christ</p>
+            <h3>Connect &amp; Grow</h3>
+            <p>
+              Whether you're exploring faith, ready for baptism, or looking to join a Life Group — there's a next step for you.
+              Wherever you are in your journey, we're here to walk with you.
+            </p>
+          </div>
+
+          <div className="connect-grid">
+            <article className="connect-card">
+              <div className="connect-card-icon">✝</div>
+              <h4>Salvation</h4>
+              <p>
+                Salvation through Jesus Christ is the beginning of a transformed life.
+                Surrender your heart to Him and experience new life in Christ.
+              </p>
+            </article>
+
+            <article className="connect-card">
+              <div className="connect-card-icon">🌊</div>
+              <h4>Baptism</h4>
+              <p>
+                Baptism is a public declaration of your faith in Jesus. Take this
+                step of obedience and celebrate your new identity in Christ.
+              </p>
+            </article>
+
+            <article className="connect-card">
+              <div className="connect-card-icon">👥</div>
+              <h4>Life Groups</h4>
+              <p>
+                Life Groups help you grow in community through fellowship,
+                Bible study, and prayer. Find your people and grow together.
+              </p>
+            </article>
+
+            <article className="connect-card">
+              <div className="connect-card-icon">🌍</div>
+              <h4>Missions</h4>
+              <p>
+                Make an eternal impact through local and global missions.
+                Whether through prayer, giving, or going — your part matters.
+              </p>
+            </article>
+          </div>
+        </div>
+      </section>
+    </>
+  );
+}
+
 function ContactPage() {
   return (
     <section className="section page-section">
@@ -703,6 +768,14 @@ function MediaPage() {
   const cardApp = '/media-app.png';
   const cardRightNow = '/media-rightnow.png';
 
+  const mediaItems = [
+    { title: 'Live Stream', image: cardLive, href: 'https://www.facebook.com/nlcfofficial' },
+    { title: 'YouTube', image: cardYouTube, href: 'https://www.youtube.com/@NLCF-Main' },
+    { title: 'Our Podcast', image: cardPodcast, href: 'https://www.instagram.com/nlcfofficial_/?igsh=N2FwdXN0c2ZpNmZ3' },
+    { title: 'Our App', image: cardApp, href: '#' },
+    { title: 'RightNow Media', image: cardRightNow, href: '#' },
+  ];
+
   return (
     <>
       <section className="media-hero" style={{ backgroundImage: `url(${mediaHero})` }}>
@@ -712,74 +785,34 @@ function MediaPage() {
         </div>
       </section>
 
-      <section className="section media-section">
-        <div className="container cal-center">
-          <p className="section-label">Get Connected</p>
-          <h3 className="cal-section-heading">Explore Our Media</h3>
-          <p className="cal-events-intro">
-            Dive into our collection of sermons, teaching series, and videos to inspire
-            your faith, grow in understanding, and stay connected with our church
-            community.
-          </p>
+      <section className="media-section">
+        <div className="container">
+          <div className="media-intro">
+            <p className="section-label">Get Connected</p>
+            <h3>Explore Our Media</h3>
+            <p>
+              Dive into our collection of sermons, teaching series, and videos to inspire
+              your faith, grow in understanding, and stay connected with our church community.
+            </p>
+          </div>
 
           <div className="media-grid">
-            <a
-              className="media-card"
-              href="https://www.facebook.com/nlcfofficial"
-              target="_blank"
-              rel="noreferrer"
-              style={{ backgroundImage: `url(${cardLive})` }}
-            >
-              <div className="media-card-overlay" />
-              <div className="media-card-content">
-                <h4>Live Stream</h4>
-                <span className="button cal-ministry-btn">Learn More</span>
-              </div>
-            </a>
-
-            <a
-              className="media-card"
-              href="https://www.youtube.com/@NLCF-Main"
-              target="_blank"
-              rel="noreferrer"
-              style={{ backgroundImage: `url(${cardYouTube})` }}
-            >
-              <div className="media-card-overlay" />
-              <div className="media-card-content">
-                <h4>YouTube</h4>
-                <span className="button cal-ministry-btn">Learn More</span>
-              </div>
-            </a>
-
-            <a
-              className="media-card"
-              href="https://www.instagram.com/nlcfofficial_/?igsh=N2FwdXN0c2ZpNmZ3"
-              target="_blank"
-              rel="noreferrer"
-              style={{ backgroundImage: `url(${cardPodcast})` }}
-            >
-              <div className="media-card-overlay" />
-              <div className="media-card-content">
-                <h4>Our Podcast</h4>
-                <span className="button cal-ministry-btn">Learn More</span>
-              </div>
-            </a>
-
-            <a className="media-card" href="#" style={{ backgroundImage: `url(${cardApp})` }}>
-              <div className="media-card-overlay" />
-              <div className="media-card-content">
-                <h4>Our App</h4>
-                <span className="button cal-ministry-btn">Learn More</span>
-              </div>
-            </a>
-
-            <a className="media-card" href="#" style={{ backgroundImage: `url(${cardRightNow})` }}>
-              <div className="media-card-overlay" />
-              <div className="media-card-content">
-                <h4>RightNow Media</h4>
-                <span className="button cal-ministry-btn">Learn More</span>
-              </div>
-            </a>
+            {mediaItems.map((item) => (
+              <a
+                key={item.title}
+                className="media-card"
+                href={item.href}
+                target="_blank"
+                rel="noreferrer"
+                style={{ backgroundImage: `url(${item.image})` }}
+              >
+                <div className="media-card-overlay" />
+                <div className="media-card-body">
+                  <h4>{item.title}</h4>
+                  <span className="media-card-btn">Learn More</span>
+                </div>
+              </a>
+            ))}
           </div>
         </div>
       </section>
@@ -841,35 +874,35 @@ function MinistriesPage(props: { selected?: MinistryCard['key'] }) {
 
   return (
     <>
-      <section
-        className="events-hero"
-        style={{ backgroundImage: `url(/hero-home.png)` }}
-      >
-        <div className="events-hero-overlay" />
-        <div className="container events-hero-content">
+      <section className="ministries-hero">
+        <div className="ministries-hero-overlay" />
+        <div className="container ministries-hero-content">
           <h2>Ministries</h2>
         </div>
       </section>
 
-      <section className="section events-content">
-        <div className="container narrow cal-center">
-          <p className="section-label">OUR MINISTRIES</p>
-          <h3 className="cal-section-heading">There's a Place For You!</h3>
-          <p>
-            No matter who you are or where you’re coming from, there’s a place for
-            you to belong, grow, and make an impact in our community.
-          </p>
+      <section className="ministries-section">
+        <div className="container">
+          <div className="ministries-intro">
+            <p className="section-label">Our Ministries</p>
+            <h3>There&apos;s a Place For You!</h3>
+            <p>
+              No matter who you are or where you&apos;re coming from, there&apos;s a place for
+              you to belong, grow, and make an impact in our community.
+            </p>
+          </div>
 
-          <div className="cal-ministry-grid">
+          <div className="ministries-grid">
             {ministryCards.map((card) => (
               <article
                 key={card.key}
-                className="cal-ministry-card"
+                className="ministry-card"
                 style={{ backgroundImage: `url(${card.imageUrl})` }}
               >
-                <div className="cal-ministry-card-inner">
+                <div className="ministry-card-overlay" />
+                <div className="ministry-card-body">
                   <h4>{card.title}</h4>
-                  <Link to={card.route} className="button cal-ministry-btn">
+                  <Link to={card.route} className="button ministry-card-btn">
                     Learn More
                   </Link>
                 </div>
@@ -1573,57 +1606,50 @@ function WhoWeArePage() {
 }
 
 function GivePage() {
-  const giveHero = '/hero-home.png';
   return (
     <>
-      <section
-        className="events-hero"
-        style={{ backgroundImage: `url(${giveHero})` }}
-      >
-        <div className="events-hero-overlay" />
-        <div className="container events-hero-content">
+      <section className="give-hero">
+        <div className="give-hero-overlay" />
+        <div className="container give-hero-content">
           <h2>Give</h2>
         </div>
       </section>
 
-      <section className="section">
-        <div className="container narrow cal-center">
-          <p className="section-label">Give Now</p>
-          <h3 className="cal-section-heading">We couldn&apos;t do it without you.</h3>
-        </div>
-      </section>
-
-      <section className="section give-section-alt">
-        <div className="container narrow cal-center">
-          <h3 className="give-why-title">The Heart Behind Our Giving</h3>
-          <p>
-            Giving is an act of worship that reflects our gratitude to God for His abundant
-            blessings. It allows us to partner with Him in advancing His Kingdom, supporting the
-            local church, helping those in need, and making a tangible difference in the lives of
-            others.
-          </p>
-          <p>
-            When we give, we demonstrate faith, trust, and obedience, acknowledging that everything
-            we have ultimately belongs to God. Generosity not only blesses others but also transforms
-            our hearts, cultivating contentment, joy, and a deeper dependence on God&apos;s provision.
-          </p>
-        </div>
-      </section>
-
-      <section className="section give-section-last">
-        <div className="container cal-center">
-          <div className="give-card">
-            <div className="give-card-body">
+      <section className="give-why">
+        <div className="container">
+          <div className="give-why-layout">
+            <div className="give-why-text">
+              <p className="section-label">Why We Give</p>
+              <h3 className="give-why-heading">The Heart Behind Our Giving</h3>
+              <p>
+                At NLCF, giving is a reflection of our love for God and our faith in His
+                provision. It is a joyful response to His goodness, an act of worship that
+                honors Him and advances His work through the local church. Every gift helps us
+                reach more people with the Gospel, support those in need, and build a community
+                rooted in faith and generosity.
+              </p>
+              <p>
+                When we give, we participate in something greater than ourselves. Our generosity
+                fuels ministry, strengthens families, and opens doors for people to encounter
+                Jesus. Whether big or small, every offering makes an eternal impact.
+              </p>
+            </div>
+            <div className="give-why-card">
+              <div className="give-card-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" />
+                </svg>
+              </div>
               <h4>Give Online</h4>
               <p>
-                Giving online is a simple, secure, and convenient way to support the mission and
-                ministries of New Life In Christ Fellowship.
+                Giving online is a simple, secure, and convenient way to support the mission
+                and ministries of New Life In Christ Fellowship.
               </p>
               <a
                 href="https://www.facebook.com/nlcfofficial"
                 target="_blank"
                 rel="noreferrer"
-                className="button cal-btn-gold give-cta"
+                className="button give-btn"
               >
                 Give Now
               </a>
@@ -1771,13 +1797,7 @@ function App() {
           />
           <Route
             path="/connect"
-            element={
-              <SimplePage
-                label="Next Steps"
-                title="Take Your Next Step With Christ"
-                body="Whether you're exploring faith, ready for baptism, or looking to join a Life Group — there's a next step for you. Salvation through Jesus Christ is the beginning of a transformed life. Baptism is a public declaration of your faith. Life Groups help you grow in community. And missions give you a chance to make an eternal impact. Wherever you are in your journey, we're here to walk with you."
-              />
-            }
+            element={<ConnectPage />}
           />
           <Route path="/ministries" element={<MinistriesPage />} />
           <Route
