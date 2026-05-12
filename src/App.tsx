@@ -1488,7 +1488,7 @@ function WorshipMinistryPage() {
 function WhoWeArePage() {
   const sections = [
     {
-      title: 'Senior Bishops',
+      title: 'Bishops & Founders',
       subtitle: 'Meet the spiritual leaders who faithfully shepherd New Life In Christ Fellowship.',
       members: [
         {
@@ -1501,7 +1501,7 @@ function WhoWeArePage() {
       ],
     },
     {
-      title: 'Pastoral Team',
+      title: 'Pastoral Council',
       subtitle: 'Meet the dedicated pastors who serve and disciple our church family.',
       members: [
         {
@@ -1541,7 +1541,7 @@ function WhoWeArePage() {
       <section className="team-hero">
         <div className="team-hero-overlay" />
         <div className="container team-hero-content">
-          <h2>Meet Our Team</h2>
+          <h2>Meet the Shepherds</h2>
         </div>
       </section>
 
