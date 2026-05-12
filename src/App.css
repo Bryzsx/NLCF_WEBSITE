@@ -138,13 +138,9 @@
   min-height: auto !important;
 }
 
-.nav-give-btn:hover {
+  .nav-give-btn:hover {
   background: #f0b32e !important;
   transform: translateY(-1px);
-}
-
-.nav-group--give {
-  display: none;
 }
 
 @media (max-width: 760px) {
@@ -153,24 +149,8 @@
   }
 
   .nav-give-btn {
-    display: none;
-  }
-
-  .nav-group--give {
-    display: flex;
-  }
-
-  .nav-give-link {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    background: #e5a11a !important;
-    color: #111111 !important;
-    padding: 0.55rem 1rem !important;
-    border-radius: 0;
-    font-weight: 800 !important;
-    font-size: 0.78rem !important;
-    margin-top: 0.25rem;
+    padding: 0.35rem 0.9rem !important;
+    font-size: 0.62rem !important;
   }
 }
 

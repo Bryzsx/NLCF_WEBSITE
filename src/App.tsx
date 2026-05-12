@@ -349,11 +349,6 @@ function Header() {
               Events
             </NavLink>
           </div>
-          <div className="nav-group nav-group--give">
-            <Link to="/give" onClick={closeMenu} className="nav-give-link">
-              Give
-            </Link>
-          </div>
         </nav>
       </div>
     </header>
