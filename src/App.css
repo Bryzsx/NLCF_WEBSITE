@@ -1185,62 +1185,80 @@ a:focus-visible {
 .cards {
   margin-top: 1.4rem;
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
-  gap: 1.1rem;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1.5rem;
 }
 
 .card {
   background: var(--nlcf-white);
-  border: 1px solid var(--nlcf-mist);
-  border-radius: 16px;
-  padding: 1.2rem;
+  border-radius: 14px;
   box-shadow: 0 10px 26px rgba(0, 0, 0, 0.08);
   transition: transform 0.2s ease, box-shadow 0.2s ease;
   position: relative;
   overflow: hidden;
 }
 
-.card::before {
-  content: '';
+.card-image-wrap {
+  position: relative;
+  height: 220px;
+  overflow: hidden;
+}
+
+.card-image {
+  height: 100%;
+  background-size: cover;
+  background-position: center;
+}
+
+.card-image-overlay {
   position: absolute;
-  inset: 0 auto auto 0;
-  width: 100%;
-  height: 3px;
-  background: linear-gradient(90deg, var(--nlcf-steel), var(--nlcf-sky));
-  transform: scaleX(0);
-  transform-origin: left center;
-  transition: transform 0.22s ease;
+  inset: 0;
+  background: linear-gradient(transparent 40%, rgba(0,0,0,0.75));
 }
 
-.card h4 {
-  margin-top: 0;
-  margin-bottom: 0.5rem;
-  color: var(--nlcf-slate);
+.card-image-text {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 1.2rem;
+  color: #fff;
+  z-index: 1;
+}
+
+.card-image-text h4 {
+  margin: 0 0 0.25rem;
+  font-size: 1.1rem;
   font-family: 'Montserrat', 'Open Sans', sans-serif;
+  color: #fff;
 }
 
-.card p {
+.card-image-text .card-schedule {
+  font-size: 0.85rem;
+  opacity: 0.9;
+}
+
+.card-body {
+  padding: 1rem 1.2rem 1.2rem;
+}
+
+.card-body p {
+  margin: 0 0 0.35rem;
+  font-size: 0.9rem;
   color: var(--nlcf-slate);
+}
+
+.card-body .card-location {
+  font-weight: 600;
+  color: var(--nlcf-steel);
+  font-size: 0.82rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
 }
 
 .card:hover {
   transform: translateY(-4px);
   box-shadow: 0 16px 32px rgba(0, 0, 0, 0.16);
-}
-
-.card:hover::before {
-  transform: scaleX(1);
-}
-
-.card a {
-  color: var(--nlcf-steel);
-  font-weight: 600;
-  text-decoration: none;
-  transition: color 0.18s ease;
-}
-
-.card a:hover {
-  color: var(--nlcf-slate);
 }
 
 .status-message {
@@ -1255,7 +1273,7 @@ a:focus-visible {
 .events-hero {
   position: relative;
   height: 290px;
-  background-image: url('https://images.unsplash.com/photo-1519671482749-fd09be7ccebf?auto=format&fit=crop&w=1900&q=80');
+  background-image: url('/team-hero-bg.png');
   background-size: cover;
   background-position: center;
   margin-top: 70px;
@@ -2703,4 +2721,183 @@ a:focus-visible {
   .ministry-detail-hero--fortress-full .ministry-detail-hero-content--center {
     min-height: min(68vh, 560px);
   }
+}
+
+.team-hero {
+  position: relative;
+  height: 380px;
+  background-image: url('/team-hero-bg.png');
+  background-size: cover;
+  background-position: center;
+  margin-top: 70px;
+  background-attachment: fixed;
+}
+
+.team-hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(0,0,0,0.65) 0%, rgba(0,0,0,0.3) 100%);
+}
+
+.team-hero-content {
+  position: relative;
+  z-index: 1;
+  height: 100%;
+  display: flex;
+  align-items: flex-end;
+  padding-bottom: 48px;
+}
+
+.team-hero-content h2 {
+  margin: 0;
+  font-size: clamp(2.4rem, 5vw, 4.2rem);
+  color: var(--nlcf-white);
+  font-family: 'Montserrat', 'Open Sans', sans-serif;
+  font-weight: 700;
+  text-shadow: 0 2px 12px rgba(0,0,0,0.3);
+}
+
+.team-section {
+  background: linear-gradient(180deg, #f0f0f0 0%, #e4e4e4 100%);
+  padding: 70px 0;
+}
+
+.team-section + .team-section {
+  padding-top: 0;
+}
+
+.team-section-title {
+  margin: 0 0 0.25rem;
+  font-family: 'Montserrat', 'Open Sans', sans-serif;
+  font-size: 1.8rem;
+  color: var(--nlcf-slate);
+  position: relative;
+  display: inline-block;
+}
+
+.team-section-title::after {
+  content: '';
+  display: block;
+  width: 50px;
+  height: 3px;
+  background: var(--nlcf-steel);
+  margin-top: 0.5rem;
+  border-radius: 2px;
+}
+
+.team-section-sub {
+  margin: 0.75rem 0 2.5rem;
+  color: var(--nlcf-slate);
+  font-size: 1rem;
+  max-width: 600px;
+}
+
+.team-grid {
+  display: grid;
+  gap: 1.5rem;
+}
+
+.team-card {
+  display: flex;
+  align-items: flex-start;
+  gap: 2rem;
+  background: var(--nlcf-white);
+  border-radius: 16px;
+  padding: 2rem;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.07);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  border: 1px solid rgba(255,255,255,0.6);
+}
+
+.team-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.12);
+}
+
+.team-photo {
+  width: 200px;
+  height: 200px;
+  min-width: 200px;
+  border-radius: 50%;
+  background-size: cover;
+  background-position: center;
+  box-shadow: 0 8px 28px rgba(0, 0, 0, 0.15);
+  border: 3px solid var(--nlcf-white);
+  transition: transform 0.3s ease;
+}
+
+.team-card:hover .team-photo {
+  transform: scale(1.03);
+}
+
+.team-info {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+
+.team-name {
+  margin: 0;
+  font-family: 'Montserrat', 'Open Sans', sans-serif;
+  color: var(--nlcf-slate);
+  font-size: 1.3rem;
+  font-weight: 700;
+}
+
+.team-role {
+  margin: 0 0 0.6rem;
+  color: var(--nlcf-steel);
+  font-size: 0.82rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.team-bio {
+  margin: 0;
+  color: #444;
+  font-size: 0.93rem;
+  line-height: 1.7;
+}
+
+@media (max-width: 640px) {
+  .team-hero {
+    height: 280px;
+    background-attachment: scroll;
+  }
+
+  .team-card {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 1.5rem;
+    gap: 1rem;
+  }
+
+  .team-photo {
+    width: 150px;
+    height: 150px;
+    min-width: 150px;
+  }
+
+  .team-section-title::after {
+    margin: 0.5rem auto 0;
+  }
+}
+
+.cal-ministry-grid {
+  margin-top: 1.8rem;
+}
+
+.cal-browse-top {
+  margin-top: 2.2rem;
+}
+
+.section.give-section-alt {
+  background: #f0f0f0;
+  padding-top: 0;
+}
+
+.section.give-section-last {
+  padding-top: 0;
 }

@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import type { FormEvent } from 'react';
 import './App.css';
-import nlcfLogo from './assets/nlcf-logo.png';
+import nlcfLogo from './assets/logo.jpg';
 import { Link, NavLink, Route, Routes } from 'react-router-dom';
 
 type ContactPayload = {
@@ -16,6 +16,7 @@ type ChurchEvent = {
   schedule: string;
   location: string;
   description: string;
+  image?: string;
 };
 
 // Default API base:
@@ -56,12 +57,15 @@ function normalizeEvent(raw: unknown, index: number): ChurchEvent {
       'Join us for worship, fellowship, and discipleship.',
   );
 
+  const image = record?.image ? String(record.image) : undefined;
+
   return {
     id: String(record?.id ?? index + 1),
     title,
     schedule,
     location,
     description,
+    image,
   };
 }
 
@@ -249,19 +253,7 @@ function Header() {
             </NavLink>
             <div className="dropdown">
               <Link to="/who-we-are" onClick={closeMenu}>
-                New to NLCF
-              </Link>
-              <Link to="/contact" onClick={closeMenu}>
-                Location
-              </Link>
-              <Link to="/who-we-are" onClick={closeMenu}>
                 Meet Our Team
-              </Link>
-              <Link to="/who-we-are" onClick={closeMenu}>
-                Our Beliefs
-              </Link>
-              <Link to="/contact" onClick={closeMenu}>
-                Contact Us
               </Link>
             </div>
           </div>
@@ -628,7 +620,7 @@ function HomePage() {
                 style={{ backgroundImage: `url(/home-midweek-bg.png)` }}
               >
                 <strong>Midweek</strong>
-                <span>Prayer &amp; Worship • Wednesdays 7PM</span>
+                <span>Prayer &amp; Worship • Wednesdays 5:00 – 7:30 PM</span>
               </div>
               <div className="cal-event-card-body">
                 <p>Midweek: Prayer &amp; Worship</p>
@@ -640,7 +632,7 @@ function HomePage() {
                 style={{ backgroundImage: `url(/home-sunday-bg.png)` }}
               >
                 <strong>Join Us This Sunday</strong>
-                <span>9:00 AM &amp; 4:00 PM</span>
+                <span>6:00 AM – 9:00 AM &amp; 10:00 AM – 12:00 PM</span>
               </div>
               <div className="cal-event-card-body">
                 <p>Sunday Service Times</p>
@@ -868,7 +860,7 @@ function MinistriesPage(props: { selected?: MinistryCard['key'] }) {
             you to belong, grow, and make an impact in our community.
           </p>
 
-          <div className="cal-ministry-grid" style={{ marginTop: '1.8rem' }}>
+          <div className="cal-ministry-grid">
             {ministryCards.map((card) => (
               <article
                 key={card.key}
@@ -886,7 +878,7 @@ function MinistriesPage(props: { selected?: MinistryCard['key'] }) {
           </div>
 
           {selectedCard && (
-            <div style={{ marginTop: '2.2rem' }}>
+            <div className="cal-browse-top">
               <SimplePage
                 label="Ministries"
                 title={selectedCard.detailTitle}
@@ -1494,29 +1486,89 @@ function WorshipMinistryPage() {
 }
 
 function WhoWeArePage() {
+  const sections = [
+    {
+      title: 'Senior Bishops',
+      subtitle: 'Meet the spiritual leaders who faithfully shepherd New Life In Christ Fellowship.',
+      members: [
+        {
+          name: 'Bishop Zenda Vivero Guerrero & Bishop Sergio Eric Guerrero',
+          role: 'Senior Bishops',
+          image: '/bishop-zenda-eric.jpg',
+          description:
+            'Bishops Zenda and Sergio faithfully lead New Life In Christ Fellowship with a shared passion for worship, prayer, and community transformation. Their ministry is marked by a strong commitment to biblical truth and a vision for a multi-generational church, discipling believers and advancing the Kingdom of God.',
+        },
+      ],
+    },
+    {
+      title: 'Pastoral Team',
+      subtitle: 'Meet the dedicated pastors who serve and disciple our church family.',
+      members: [
+        {
+          name: 'Pastor Elbert Burdeos',
+          role: 'Pastor',
+          image: '/elbert-burdeos.jpg',
+          description:
+            'Pastor Elbert Burdeos faithfully serves the church with a heart for teaching, discipleship, and shepherding God\'s people. He is dedicated to helping believers grow deeper in their relationship with Christ through sound biblical instruction and personal mentorship.',
+        },
+        {
+          name: 'Pastora Jessamine Bentilanon',
+          role: 'Pastora',
+          image: '/pastora-jessamine.jpg',
+          description:
+            'Pastora Jessamine Bentilanon ministers with compassion and grace, helping women and families grow in their faith. Through heartfelt counseling, prayer ministry, and discipleship, she walks alongside individuals facing life\'s challenges, pointing them to the hope found in Jesus Christ.',
+        },
+        {
+          name: 'Youth Pastor Leo Mandin',
+          role: 'Youth Pastor',
+          image: '/youth-pastor-leo.jpg',
+          description:
+            'Youth Pastor Leo Mandin leads the next generation with passion, guiding youth to know Christ and live out their faith. Through dynamic worship, relevant teaching, and intentional discipleship, he empowers teenagers to navigate life with biblical wisdom and courage.',
+        },
+        {
+          name: 'Pastora Mila',
+          role: 'Pastora',
+          image: '/pastora-mila.jpg',
+          description:
+            'Pastora Mila serves the church with a heart of worship and prayer, nurturing the spiritual growth of the congregation. She is devoted to interceding for the church family and encouraging believers to deepen their prayer lives and develop a vibrant worship culture.',
+        },
+      ],
+    },
+  ];
+
   return (
-    <section className="section page-section">
-      <div className="container narrow cal-center">
-        <p className="section-label">Who We Are</p>
-        <h3>A Church Family Centered on Christ</h3>
-        <p>
-          New Life In Christ Fellowship is a Bible-believing church committed to worship,
-          discipleship, and mission. Our heart is to lead people into a growing relationship with
-          Jesus and help families live out God&apos;s purpose together.
-        </p>
-        <h4 style={{ marginTop: '2rem' }}>Our Beliefs</h4>
-        <p>
-          We believe in one God — Father, Son, and Holy Spirit. We believe Jesus Christ is the
-          Son of God, born of a virgin, crucified for our sins, and raised on the third day.
-          Salvation is found in no one else but through faith in Christ alone.
-        </p>
-        <h4 style={{ marginTop: '1.5rem' }}>Our Mission</h4>
-        <p>
-          Helping people grow into wholehearted followers of Jesus — by knowing God, growing
-          together, discovering purpose, and making a difference.
-        </p>
-      </div>
-    </section>
+    <>
+      <section className="team-hero">
+        <div className="team-hero-overlay" />
+        <div className="container team-hero-content">
+          <h2>Meet Our Team</h2>
+        </div>
+      </section>
+
+      {sections.map((section) => (
+        <section className="section team-section" key={section.title}>
+          <div className="container">
+            <h3 className="team-section-title">{section.title}</h3>
+            <p className="team-section-sub">{section.subtitle}</p>
+            <div className="team-grid">
+              {section.members.map((member) => (
+                <div className="team-card" key={member.name}>
+                  <div
+                    className="team-photo"
+                    style={{ backgroundImage: `url(${member.image})` }}
+                  />
+                  <div className="team-info">
+                    <h4 className="team-name">{member.name}</h4>
+                    <p className="team-role">{member.role}</p>
+                    <p className="team-bio">{member.description}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+      ))}
+    </>
   );
 }
 
@@ -1541,9 +1593,9 @@ function GivePage() {
         </div>
       </section>
 
-      <section className="section" style={{ background: '#f0f0f0', paddingTop: 0 }}>
+      <section className="section give-section-alt">
         <div className="container narrow cal-center">
-          <h3 className="give-why-title" style={{ marginTop: 0 }}>The Heart Behind Our Giving</h3>
+          <h3 className="give-why-title">The Heart Behind Our Giving</h3>
           <p>
             Giving is an act of worship that reflects our gratitude to God for His abundant
             blessings. It allows us to partner with Him in advancing His Kingdom, supporting the
@@ -1558,7 +1610,7 @@ function GivePage() {
         </div>
       </section>
 
-      <section className="section" style={{ paddingTop: 0 }}>
+      <section className="section give-section-last">
         <div className="container cal-center">
           <div className="give-card">
             <div className="give-card-body">
@@ -1602,7 +1654,44 @@ function EventsPage() {
         if (!active) {
           return;
         }
-        setStatus('error');
+        const fallback: ChurchEvent[] = [
+          {
+            id: '1',
+            title: 'Midweek Prayer & Worship',
+            schedule: 'Wednesdays 5:00 – 7:30 PM',
+            location: 'NLCF Mother Church',
+            description: 'Prayer & worship service for midweek renewal.',
+            image: '/home-midweek-bg.png',
+          },
+          {
+            id: '2',
+            title: 'Sunday Service',
+            schedule: 'Sundays 6:00 AM – 9:00 AM & 10:00 AM – 12:00 PM',
+            location: 'NLCF Mother Church',
+            description: 'Worship, preaching, and fellowship services for the whole church.',
+            image: '/home-sunday-bg.png',
+          },
+          {
+            id: '3',
+            title: 'Pastors & Missionaries Gathering',
+            schedule: 'May 30, 2026 • 7:00 AM – 5:00 PM',
+            location: 'NLCF Mother Church',
+            description:
+              'Calling all Pastors and Missionaries! Be refreshed and renewed with a day of fellowship, prayer, and encouragement. Guest speaker: Rev. Mark Briones.',
+            image: '/event-pastors-may30.jpg',
+          },
+          {
+            id: '4',
+            title: '45th NLCF Annual Reunion',
+            schedule: 'May 31, 2026 • 8:00 AM – 5:00 PM',
+            location: 'FSUU Gym',
+            description:
+              'The 45th NLCF Annual Reunion is almost here! Join us as we celebrate this year\'s theme, "Honoring our Past, Celebrating our Present, Inspiring our Future."',
+            image: '/May31.jpg',
+          },
+        ];
+        setEvents(fallback);
+        setStatus('ready');
       }
     };
 
@@ -1622,17 +1711,9 @@ function EventsPage() {
         </div>
       </section>
       <section className="section events-content">
-        <div className="container narrow cal-center">
-          <p className="section-label">Latest Happenings</p>
-          <h3>Upcoming Events</h3>
-          <p>Stay informed and get involved by checking out all upcoming church events.</p>
+        <div className="container">
 
           {status === 'loading' && <p className="status-message">Loading events...</p>}
-          {status === 'error' && (
-            <p className="status-message error">
-              Could not load events from backend. Start your NestJS API and create `GET /events`.
-            </p>
-          )}
 
           {status === 'ready' && events.length === 0 && (
             <p className="status-message">No events available yet. Add one from your backend.</p>
@@ -1642,12 +1723,23 @@ function EventsPage() {
             <div className="cards">
               {events.map((event) => (
                 <article className="card" key={event.id}>
-                  <h4>{event.title}</h4>
-                  <p>
-                    <strong>{event.schedule}</strong>
-                  </p>
-                  <p>{event.location}</p>
-                  <p>{event.description}</p>
+                  {event.image && (
+                    <div className="card-image-wrap">
+                      <div
+                        className="card-image"
+                        style={{ backgroundImage: `url(${event.image})` }}
+                      />
+                      <div className="card-image-overlay" />
+                      <div className="card-image-text">
+                        <h4>{event.title}</h4>
+                        <p className="card-schedule">{event.schedule}</p>
+                      </div>
+                    </div>
+                  )}
+                  <div className="card-body">
+                    <p className="card-location">{event.location}</p>
+                    <p>{event.description}</p>
+                  </div>
                 </article>
               ))}
             </div>
