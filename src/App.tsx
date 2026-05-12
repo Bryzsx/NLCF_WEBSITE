@@ -610,16 +610,16 @@ function HomePage() {
             inspire, connect, and strengthen your faith.
           </p>
           <div className="cal-event-cards">
-            <article className="cal-event-card">
+            <article className="cal-event-card cal-event-card--featured">
               <div
-                className="cal-event-card-top cal-event-top-a"
-                style={{ backgroundImage: `url(/home-app-bg.png)` }}
+                className="cal-event-card-top cal-event-top-d"
+                style={{ backgroundImage: `url(/event-pastors-may30.jpg)` }}
               >
-                <strong>NLCF App</strong>
-                <span>Stay connected on the go</span>
+                <strong>Pastors &amp; Missionaries Gathering</strong>
+                <span>May 30, 2026 • 7:00 AM – 5:00 PM</span>
               </div>
               <div className="cal-event-card-body">
-                <p>Download our church app for updates and resources.</p>
+                <p>Calling all Pastors and Missionaries! Be refreshed and renewed.</p>
               </div>
             </article>
             <article className="cal-event-card">

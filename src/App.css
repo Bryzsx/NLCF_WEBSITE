@@ -724,6 +724,18 @@
   background-color: #0d4ecf; /* fallback if background image fails to load */
 }
 
+.cal-event-top-d {
+  background-color: #1a2744;
+}
+
+.cal-event-card--featured .cal-event-card-top {
+  min-height: 190px;
+}
+
+.cal-event-card--featured .cal-event-card-top strong {
+  font-size: 1.15rem;
+}
+
 .cal-event-card-body {
   padding: 1.1rem 1.25rem;
 }
